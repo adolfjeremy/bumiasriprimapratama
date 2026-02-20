@@ -1,0 +1,62 @@
+---
+import { Image } from "astro:assets";
+import visionBg from "../assets/images/vision-bg.png";
+import missionBg from "../assets/images/mission-bg.png";
+---
+
+<section class="px-[16px] md:px-[64px] lg:px-[80px] pb-8">
+  <div class="px-[16px] md:px-[64px] lg:px-[80px] mx-auto">
+    <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+      <!-- VISION -->
+      <div class="relative rounded-3xl overflow-hidden group">
+        <Image
+          src={visionBg}
+          alt="Fuel Distribution Vision"
+          class="w-full h-[320px] object-cover"
+        />
+
+        <div
+          class="absolute inset-0 flex flex-col items-center justify-center text-center px-8"
+        >
+          <h2 class="text-white/90 text-3xl md:text-4xl font-semibold mb-6">
+            Our Vision
+          </h2>
+
+          <p
+            class="text-white/90 leading-relaxed max-w-lg text-[15px] md:text-[16px]"
+          >
+            High Speed Diesel Oil Supplier and provision of bunker Service with
+            leading- edge capabilities in quality and services, with aim of
+            national and international reputation.
+          </p>
+        </div>
+      </div>
+
+      <!-- MISSION -->
+      <div class="relative rounded-3xl overflow-hidden group">
+        <Image
+          src={missionBg}
+          alt="Fuel Distribution Mission"
+          class="w-full h-[320px] object-cover"
+        />
+
+        <div
+          class="absolute inset-0 flex flex-col items-center justify-center text-center px-8"
+        >
+          <h2 class="text-white/90 text-3xl md:text-4xl font-semibold mb-6">
+            Our Mission
+          </h2>
+
+          <p
+            class="text-white/90 leading-relaxed max-w-lg text-[15px] md:text-[16px]"
+          >
+            To become a distribution company in the High SpeedDiesel Oil (HSD)
+            with main focus of services in the field of Industy, Mining and
+            Transportation nationwide including reliable Bunker Service
+            Provider.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

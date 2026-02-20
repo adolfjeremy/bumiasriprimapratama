@@ -1,0 +1,10 @@
+---
+const { href, text = "Request Quotation", style } = Astro.props;
+---
+
+<a
+  href={href}
+  class={`bg-[#018FF5] hover:bg-[#0077d4] transition duration-300  px-10 py-4 rounded-full hover:shadow-xl cursor-pointer text-[#fafafa] font-semibold ${style}`}
+>
+  {text}
+</a>

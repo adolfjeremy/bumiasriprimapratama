@@ -1,0 +1,33 @@
+---
+import { Image } from "astro:assets";
+import Button from "./Button.astro";
+const { title, subtitle, background } = Astro.props;
+---
+
+<section
+  class="relative h-[75vh] lg:h-screen flex items-center text-white px-[16px] md:px-[64px] lg:px-[80px]"
+>
+  <Image
+    src={background}
+    alt="oil tanker sailing"
+    class="absolute inset-0 w-full h-full object-cover"
+    quality={60}
+    format="webp"
+    loading="eager"
+    fetchpriority="high"
+  />
+
+  <div class="container relative z-10 max-w-3xl">
+    <h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight">
+      {title}
+    </h1>
+
+    <p class="mt-6 text-lg text-gray-200 leading-relaxed">
+      {subtitle}
+    </p>
+
+    <div class="mt-8">
+      <Button href="/contact" text="Request Quotation" />
+    </div>
+  </div>
+</section>

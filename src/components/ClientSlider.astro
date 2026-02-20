@@ -1,0 +1,68 @@
+---
+import logo1 from "../assets/images/logo1.svg";
+import logo2 from "../assets/images/logo2.svg";
+import logo3 from "../assets/images/logo3.svg";
+import logo4 from "../assets/images/logo4.svg";
+import logo5 from "../assets/images/logo5.svg";
+import logo6 from "../assets/images/logo6.svg";
+import logo7 from "../assets/images/logo7.svg";
+---
+
+<section class="bg-white py-[70px] overflow-hidden">
+  <div class="px-[16px] md:px-[64px] lg:px-[80px]">
+    <h2 class="text-center text-2xl md:text-3xl font-semibold text-dark mb-12">
+      Trusted by Industry Leaders
+    </h2>
+
+    <div class="marquee">
+      <div class="marquee-track">
+        <!-- set 1 -->
+        <img src={logo1.src} alt="logo" />
+        <img src={logo2.src} alt="logo" />
+        <img src={logo3.src} alt="logo" />
+        <img src={logo4.src} alt="logo" />
+        <img src={logo5.src} alt="logo" />
+        <img src={logo6.src} alt="logo" />
+        <img src={logo7.src} alt="logo" />
+
+        <!-- duplicate set -->
+        <img src={logo1.src} alt="logo" />
+        <img src={logo2.src} alt="logo" />
+        <img src={logo3.src} alt="logo" />
+        <img src={logo4.src} alt="logo" />
+        <img src={logo5.src} alt="logo" />
+        <img src={logo6.src} alt="logo" />
+        <img src={logo7.src} alt="logo" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .marquee {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 80px;
+    width: max-content;
+    animation: scroll 30s linear infinite;
+  }
+
+  .marquee-track img {
+    height: 30px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+</style>

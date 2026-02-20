@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import Highlight from "../components/Hightlight.astro";
+import Overview from "../components/Overview.astro";
+import OurValueSlider from "../components/OurValueSlider.astro";
+import OurServices from "../components/OurServices.astro";
+// import ClientSlider from "../components/ClientSlider.astro";
+import WhyTrusted from "../components/WhyTrusted.astro";
+import Coverage from "../components/Coverage.astro";
+import CTA from "../components/CTA.astro";
+
+import heroImage from "../assets/images/hero_home.png";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "PT Bumi Asri Prima Pratama",
+  url: "https://bumiasriprimapratama.com",
+  description:
+    "Fuel distribution and bunker services company supplying High Speed Diesel, Marine Fuel Oil, Ship-to-Ship transfer, and Floating Storage Unit operations across Indonesia.",
+  areaServed: "Indonesia",
+  foundingDate: "2004",
+};
+---
+
+<BaseLayout
+  title="Fuel Distribution & Bunker Services Indonesia | PT BAPP"
+  description="PT BAPP provides fuel distribution across Indonesia supplying High Speed Diesel (HSD), Marine Fuel Oil (MFO), bunker services, Ship-to-Ship transfer, and Floating Storage Unit operations."
+  schema={schema}
+>
+  <Hero
+    title="Fuel Distribution & Bunker Services Across Indonesia Since 2004"
+    subtitle="Supplying HSD, Marine Fuel Oil, and Ship-to-Ship bunker services with strategic storage and nationwide distribution coverage."
+    background={heroImage}
+  />
+  <Overview />
+  <Highlight />
+  <OurValueSlider />
+  <OurServices />
+  <!-- <ClientSlider /> -->
+  <Coverage />
+  <WhyTrusted />
+  <CTA />
+</BaseLayout>

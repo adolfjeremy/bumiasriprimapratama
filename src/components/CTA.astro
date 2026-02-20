@@ -1,0 +1,43 @@
+---
+import { Image } from "astro:assets";
+import ctaBg from "../assets/images/cta_bg.png";
+import Button from "./Button.astro";
+---
+
+<section
+  class="relative py-[140px] min-h-[80svh] text-white text-center overflow-hidden"
+>
+  <!-- Background -->
+  <Image
+    src={ctaBg}
+    alt="oil tanker sailing"
+    class="absolute inset-0 w-full h-full object-cover"
+    quality={100}
+    format="webp"
+    loading="eager"
+    fetchpriority="high"
+  />
+
+  <div
+    class="absolute inset-0
+        bg-gradient-to-t
+        from-black/80
+        via-black/60
+        to-black/30"
+  >
+  </div>
+  <div
+    class="relative px-[16px] md:px-[64px] lg:px-[80px] flex flex-col items-center justify-center gap-6"
+  >
+    <h2 class="text-4xl md:text-5xl font-semibold leading-tight">
+      Secure Reliable Fuel Supply for Your Operations
+    </h2>
+
+    <p class="text-white/80 text-lg leading-relaxed">
+      Partner with BAPP for dependable HSD, Marine Fuel Oil, and bunker services
+      tailored to your operational needs.
+    </p>
+
+    <Button href="/contact" />
+  </div>
+</section>

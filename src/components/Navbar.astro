@@ -1,0 +1,163 @@
+---
+import logo from "../assets/images/logo-bapp.png";
+import Button from "./Button.astro";
+const pathname = Astro.url.pathname;
+const links = [
+  { name: "Home", href: "/" },
+  { name: "About Us", href: "/about-us" },
+  { name: "Services", href: "/services" },
+  { name: "Contact Us", href: "/contact" },
+];
+const isActive = (href: string) =>
+  href === "/" ? pathname === "/" : pathname.startsWith(href);
+---
+
+<header
+  class="absolute top-0 left-0 right-0 w-full z-50 px-[16px] md:px-[64px] lg:px-[80px]"
+>
+  <div class="mx-auto py-4 flex items-center justify-between">
+    <!-- LOGO -->
+    <div class="flex items-center gap-2">
+      <img src={logo.src} alt="BAPP" class="w-26 md:w-36 h-auto" />
+    </div>
+
+    <!-- DESKTOP NAV -->
+    <nav class="hidden md:flex items-center gap-8 text-[#fafafa] text-base">
+      {
+        links.map((item) => (
+          <a
+            href={item.href}
+            class={`nav-link hover:text-[#018FF5] ${isActive(item.href) ? "active" : ""}`}
+          >
+            {item.name}
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- CTA -->
+    <div class="hidden lg:block">
+      <Button text="Request Quotation" />
+    </div>
+
+    <!-- MOBILE MENU BUTTON -->
+    <button
+      id="menuBtn"
+      class="md:hidden relative z-55 w-8 h-8 flex flex-col justify-center gap-1.5"
+      aria-label="Open Menu"
+    >
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </button>
+  </div>
+
+  <!-- MOBILE DRAWER -->
+  <div id="drawer" class="fixed inset-0 z-50 hidden">
+    <div id="backdrop" class="absolute inset-0 bg-black/50"></div>
+
+    <div
+      id="drawerPanel"
+      class="absolute left-0 top-0 h-full w-72 bg-[#F3EFFE]
+         p-6 flex flex-col items-center justify-center gap-6
+         transform -translate-x-full
+         transition-[transform,opacity] duration-300 ease-out
+         opacity-0"
+    >
+      <!-- NAV -->
+      <nav
+        class="flex flex-col gap-4 text-[#141219] text-lg text-center mobile-nav"
+      >
+        {
+          links.map((item) => (
+            <a
+              href={item.href}
+              class={`nav-link hover:text-[#018FF5] ${isActive(item.href) ? "active" : ""}`}
+            >
+              {item.name}
+            </a>
+          ))
+        }
+      </nav>
+
+      <!-- CTA -->
+      <Button text="Request Quotation" />
+    </div>
+  </div>
+</header>
+
+<style>
+  #menuBtn .line {
+    height: 4px;
+    width: 100%;
+    background: #018ff5;
+    border-radius: 3px;
+    transition:
+      transform 0.3s ease,
+      opacity 0.2s ease;
+  }
+
+  #menuBtn.is-open .line:nth-child(1) {
+    transform: translateY(13px) rotate(45deg);
+  }
+
+  #menuBtn.is-open .line:nth-child(2) {
+    opacity: 0;
+  }
+
+  #menuBtn.is-open .line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+  .mobile-nav .nav-link {
+    font-size: 1.6825rem;
+  }
+  .nav-link {
+    transition: color 0.2s ease;
+  }
+
+  .nav-link.active {
+    color: #018ff5;
+    font-weight: 600;
+  }
+</style>
+
+<script>
+  const menuBtn = document.getElementById("menuBtn");
+  const drawer = document.getElementById("drawer");
+  const drawerPanel = document.getElementById("drawerPanel");
+  const backdrop = document.getElementById("backdrop");
+
+  if (!menuBtn || !drawer || !drawerPanel || !backdrop) {
+    throw new Error("Required DOM elements not found");
+  }
+
+  function openDrawer() {
+    drawer!.classList.remove("hidden");
+
+    requestAnimationFrame(() => {
+      drawerPanel!.classList.remove("-translate-x-full");
+      drawerPanel!.classList.remove("opacity-0");
+      menuBtn!.classList.add("is-open");
+    });
+  }
+
+  function closeDrawer() {
+    drawerPanel!.classList.add("-translate-x-full");
+    drawerPanel!.classList.add("opacity-0");
+    menuBtn!.classList.remove("is-open");
+
+    setTimeout(() => {
+      drawer!.classList.add("hidden");
+    }, 300);
+  }
+
+  menuBtn!.addEventListener("click", () => {
+    if (drawer!.classList.contains("hidden")) {
+      openDrawer();
+    } else {
+      closeDrawer();
+    }
+  });
+
+  backdrop!.addEventListener("click", closeDrawer);
+</script>

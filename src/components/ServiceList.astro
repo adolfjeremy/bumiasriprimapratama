@@ -1,0 +1,122 @@
+---
+import { Image } from "astro:assets";
+import ServiceBg from "../assets/images/fuel_termainal_img.png";
+---
+
+<section class="relative py-24 md:py-32 overflow-hidden text-white">
+  <!-- Background Image -->
+  <div class="absolute inset-0">
+    <Image
+      src={ServiceBg}
+      alt="Fuel terminal at twilight with tankers"
+      class="w-full h-full object-cover"
+      quality={60}
+      format="webp"
+    />
+    <div class="absolute inset-0 bg-[#0F172A]/56"></div>
+  </div>
+
+  <div class="relative max-w-7xl mx-auto px-6">
+    <!-- Section Header -->
+    <div class="text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">Core Fuel Operations</h2>
+      <div class="w-20 h-[3px] bg-white mx-auto rounded-full mb-6"></div>
+      <p class="text-lg text-white/70 max-w-3xl mx-auto">
+        Structured fuel distribution and marine energy services across
+        Indonesia’s industrial and maritime sectors.
+      </p>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid md:grid-cols-2 gap-12">
+      <!-- Card Template -->
+      <div
+        class="group bg-white/10 backdrop-blur-md rounded-3xl p-10 border border-white/20 transition-all duration-300 hover:bg-white/20 hover:-translate-y-2"
+      >
+        <div class="flex items-center justify-start gap-3 mb-3">
+          <div class="w-1 h-12 bg-[#1E73BE] rounded-full"></div>
+
+          <h3 class="text-2xl font-semibold">
+            High Speed Diesel (HSD) Trading
+          </h3>
+        </div>
+
+        <p class="text-white/80 leading-relaxed mb-6">
+          High Speed Diesel (HSD) Trading services supporting industrial
+          facilities, mining operations, transport fleets, and large-scale
+          commercial activities across Indonesia.
+        </p>
+
+        <ul class="space-y-3 text-white/70">
+          <li>• Nationwide bulk fuel coordination</li>
+          <li>• Controlled storage and dispatch management</li>
+          <li>• Quality and compliance oversight</li>
+        </ul>
+      </div>
+
+      <!-- MFO -->
+      <div
+        class="group bg-white/10 backdrop-blur-md rounded-3xl p-10 border border-white/20 transition-all duration-300 hover:bg-white/20 hover:-translate-y-2"
+      >
+        <div class="flex items-center justify-start gap-3 mb-3">
+          <div class="w-1 h-12 bg-[#1E73BE] rounded-full"></div>
+
+          <h3 class="text-2xl font-semibold">Marine Fuel Oil (MFO) Supply</h3>
+        </div>
+        <p class="text-white/80 leading-relaxed mb-6">
+          Marine Fuel Oil (MFO) Supply tailored for domestic shipping lines,
+          offshore support vessels, and maritime logistics operators across
+          Indonesian waters.
+        </p>
+        <ul class="space-y-3 text-white/70">
+          <li>• Port-based delivery coordination</li>
+          <li>• Maritime-compliant fuel handling</li>
+          <li>• Reliable marine fuel availability</li>
+        </ul>
+      </div>
+
+      <!-- STS -->
+      <div
+        class="group bg-white/10 backdrop-blur-md rounded-3xl p-10 border border-white/20 transition-all duration-300 hover:bg-white/20 hover:-translate-y-2"
+      >
+        <div class="flex items-center justify-start gap-3 mb-3">
+          <div class="w-1 h-12 bg-[#1E73BE] rounded-full"></div>
+
+          <h3 class="text-2xl font-semibold">
+            Bunker Services & Ship-to-Ship (STS)
+          </h3>
+        </div>
+        <p class="text-white/80 leading-relaxed mb-6">
+          Bunker Services & Ship-to-Ship (STS) operations enabling offshore fuel
+          transfer under structured safety and compliance frameworks.
+        </p>
+        <ul class="space-y-3 text-white/70">
+          <li>• Offshore fuel transfer coordination</li>
+          <li>• Operational risk management</li>
+          <li>• Regulated bunker handling procedures</li>
+        </ul>
+      </div>
+
+      <!-- FSU -->
+      <div
+        class="group bg-white/10 backdrop-blur-md rounded-3xl p-10 border border-white/20 transition-all duration-300 hover:bg-white/20 hover:-translate-y-2"
+      >
+        <div class="flex items-center justify-start gap-3 mb-3">
+          <div class="w-1 h-12 bg-[#1E73BE] rounded-full"></div>
+
+          <h3 class="text-2xl font-semibold">Floating Storage Unit (FSU)</h3>
+        </div>
+        <p class="text-white/80 leading-relaxed mb-6">
+          Floating Storage Unit (FSU) infrastructure strategically positioned in
+          Nusa Tenggara Timur (NTT) to strengthen regional fuel supply
+          stability.
+        </p>
+        <ul class="space-y-3 text-white/70">
+          <li>• Strategic eastern Indonesia positioning</li>
+          <li>• Stabilized regional fuel supply</li>
+          <li>• Integrated storage and dispatch system</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

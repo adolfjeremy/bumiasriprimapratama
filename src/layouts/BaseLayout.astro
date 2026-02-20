@@ -1,0 +1,61 @@
+---
+const {
+  title,
+  description,
+  image = "/og-image.jpg",
+  url = Astro.url.pathname,
+  type = "website",
+  schema
+} = Astro.props;
+
+const fullUrl = `https://bumiasriprimapratama.com${url}`;
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={fullUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={fullUrl} />
+    <meta
+      property="og:image"
+      content={`https://bumiasriprimapratama.com${image}`}
+    />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta
+      name="twitter:image"
+      content={`https://bumiasriprimapratama.com${image}`}
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" />
+    <!-- Schema Injection -->
+    {schema && (
+      <script type="application/ld+json">
+        {JSON.stringify(schema)}
+      </script>
+    )}
+  </head>
+
+  <body class="bg-white text-gray-900 antialiased">
+    <Navbar />
+    <slot />
+    <Footer />
+  </body>
+</html>

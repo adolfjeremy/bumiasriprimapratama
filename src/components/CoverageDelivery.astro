@@ -1,0 +1,29 @@
+---
+import { Image } from "astro:assets";
+import coverageArea from "../assets/images/coverages.png";
+---
+
+<section class="py-24 md:py-32 bg-[#F8FAFC]">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-[#0F172A] mb-6">
+        Strategic Fuel Network Across Key Indonesian Corridors
+      </h2>
+      <div class="w-20 h-[3px] bg-[#018FF5] mx-auto rounded-full mb-6"></div>
+      <p class="text-lg text-slate-600 leading-relaxed">
+        BAPP operates through strategically positioned distribution points and
+        storage assets across major industrial and maritime corridors in
+        Indonesia, ensuring stable and responsive fuel supply nationwide.
+      </p>
+    </div>
+
+    <!-- MAP IMAGE -->
+    <div class="mb-16">
+      <Image
+        src={coverageArea}
+        alt="Fuel distribution network map showing Sumatra, Java, Kalimantan, Bali and NTT coverage"
+        class="w-full h-auto rounded-xl"
+      />
+    </div>
+  </div>
+</section>

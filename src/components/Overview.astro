@@ -1,0 +1,47 @@
+---
+import overviewImage from "../assets/images/bapp_overview.png";
+import Button from "./Button.astro";
+---
+
+<section
+  class="px-[16px] md:px-[64px] lg:px-[80px] py-[64px] md:py-[72px] lg:py-[96px]"
+>
+  <div class="container grid md:grid-cols-2 gap-12 items-center">
+    <!-- Text -->
+    <div>
+      <span
+        class="text-[#018FF5] text-sm font-semibold tracking-wider uppercase"
+      >
+        About BAPP
+      </span>
+
+      <h2
+        class="mt-4 text-3xl md:text-4xl font-semibold text-dark leading-tight"
+      >
+        Reliable Fuel Distribution for Industry and Maritime Operations
+      </h2>
+
+      <p class="mt-6 text-gray-600 leading-relaxed">
+        PT Bumi Asri Prima Pratama (BAPP) has been supplying High Speed Diesel
+        (HSD) and Marine Fuel Oil to industrial, mining, and maritime sectors
+        across Indonesia for over two decades.
+      </p>
+
+      <p class="mt-4 mb-6 text-gray-600 leading-relaxed">
+        With nationwide distribution coverage, bunker services, and strategic
+        storage facilities, BAPP delivers reliable fuel solutions that support
+        transportation, offshore operations, and heavy industries.
+      </p>
+      <Button text="About Us" />
+    </div>
+
+    <!-- Image -->
+    <div class="relative">
+      <img
+        src={overviewImage.src}
+        alt="Fuel storage and marine distribution facility"
+        class="rounded-xl shadow-lg"
+      />
+    </div>
+  </div>
+</section>

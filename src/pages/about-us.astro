@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import OurJourney from "../components/OurJourney.astro";
+import Capability from "../components/Capability.astro";
+import VisionMission from "../components/VisionMission.astro";
+import OrgChart from "../components/OrgChart.astro";
+import Closing from "../components/Closing.astro";
+import CTA from "../components/CTA.astro";
+
+import aboutImage from "../assets/images/hero-about-us.png";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  name: "About PT Bumi Asri Prima Pratama",
+  url: "https://bumiasriprimapratama.com/about",
+  description:
+    "Learn about PT Bumi Asri Prima Pratama, a fuel distribution company in Indonesia serving industrial, marine, offshore, and mining sectors.",
+  mainEntity: {
+    "@type": "Organization",
+    name: "PT Bumi Asri Prima Pratama",
+    alternateName: "BAPP",
+    foundingDate: "2004",
+    areaServed: {
+      "@type": "Country",
+      name: "Indonesia",
+    },
+    industry: "Fuel Distribution and Logistics",
+  },
+};
+---
+
+<BaseLayout
+  title="About PT Bumi Asri Prima Pratama | Fuel Distribution Company Indonesia"
+  description="PT BAPP is an Indonesian fuel distribution company supplying High Speed Diesel, Marine Fuel Oil, bunker services, Ship-to-Ship transfer, and FSU operations nationwide since 2004."
+  schema={schema}
+>
+  <Hero
+    title="Fuel Distribution & Marine Energy Services in Indonesia"
+    subtitle="Providing High Speed Diesel (HSD) Trading, Marine Fuel Oil (MFO) Supply, Bunker Services & Ship-to-Ship (STS) operations, and Floating Storage Unit (FSU) infrastructure across Indonesia’s industrial and maritime sectors."
+    background={aboutImage}
+  />
+  <OurJourney />
+  <VisionMission />
+  <Capability />
+  <OrgChart />
+  <Closing />
+  <CTA />
+</BaseLayout>

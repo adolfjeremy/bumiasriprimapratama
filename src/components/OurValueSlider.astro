@@ -1,0 +1,218 @@
+---
+import {
+  Handshake,
+  Network,
+  TrendingUp,
+  ShieldCheck,
+  Factory,
+  HardHat,
+} from "@lucide/astro";
+const slides = [
+  {
+    icon: Handshake,
+    title: "Nurturing Partnerships",
+    desc: "Expanding winning collaborations with customers and partners to boost business, economic and national growth.",
+  },
+  {
+    icon: Network,
+    title: "Strategic Alliances",
+    desc: "Building long-term strategic alliances to deliver sustainable value for stakeholders.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Market Leadership",
+    desc: "Driving leadership through innovation, governance, and operational excellence.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Trusted Excellence",
+    desc: "Delivering trusted solutions with uncompromising quality and integrity.",
+  },
+  {
+    icon: Factory,
+    title: "Operational Integrity",
+    desc: "Ensuring reliable fuel distribution through disciplined execution, safety standards, and accountable operations.",
+  },
+  {
+    icon: HardHat,
+    title: "Safety Commitment",
+    desc: "Maintaining strict safety standards in storage, transport, and bunker operations to ensure secure and uninterrupted fuel supply.",
+  },
+];
+---
+
+<section
+  class="bg-[#018FF5] text-white px-[16px] md:px-[64px] lg:px-[80px] py-[64px] md:py-[72px] lg:py-[96px] flex items-center justify-center"
+>
+  <div class="container text-center">
+    <h2 class="text-4xl font-semibold mb-16">Our Value</h2>
+
+    <!-- ICON SLIDER -->
+    <div class="swiper mySwiper mb-12">
+      <div class="swiper-wrapper">
+        {
+          slides.map((slide) => {
+            const Icon = slide.icon;
+
+            return (
+              <div class="swiper-slide flex justify-center">
+                <div class="icon-slide">
+                  <div class="icon-wrapper flex items-center justify-center">
+                    <Icon size={60} />
+                  </div>
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+
+    <!-- TEXT -->
+    <div id="value-text" class="max-w-2xl mx-auto">
+      <h3 class="text-3xl font-semibold mb-4">
+        {slides[0].title}
+      </h3>
+      <p class="text-white/90 leading-relaxed min-h-6">
+        {slides[0].desc}
+      </p>
+    </div>
+
+    <!-- CONTROLS -->
+    <div class="flex justify-center items-center gap-10 mt-5">
+      <button class="prev arrow trasition">←</button>
+      <div class="swiper-pagination !relative !w-auto"></div>
+      <button class="next arrow trasition">→</button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .swiper {
+    overflow: visible;
+  }
+
+  .icon-slide {
+    opacity: 0.4;
+    transition:
+      transform 0.4s ease,
+      opacity 0.4s ease;
+  }
+
+  .swiper-slide-active .icon-slide {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+
+  .icon {
+    font-size: 120px;
+  }
+
+  .arrow {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .arrow:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  .swiper-pagination-bullet {
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 1;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: white;
+  }
+</style>
+
+<!-- Swiper CSS -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+
+<!-- Swiper JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
+></script>
+
+<script>
+  declare global {
+    interface Window {
+      Swiper: any;
+    }
+  }
+
+  window.addEventListener("load", function () {
+    const data = [
+      {
+        title: "Nurturing Partnerships",
+        desc: "Expanding winning collaborations with customers and partners to boost business, economic and national growth",
+      },
+      {
+        title: "Strategic Alliances",
+        desc: "Building long-term strategic alliances to deliver sustainable value for stakeholders",
+      },
+      {
+        title: "Market Leadership",
+        desc: "Driving leadership through innovation, governance, and operational excellence",
+      },
+      {
+        title: "Trusted Excellence",
+        desc: "Delivering trusted solutions with uncompromising quality and integrity",
+      },
+      {
+        title: "Operational Integrity",
+        desc: "Ensuring reliable fuel distribution through disciplined execution, safety standards, and accountable operations across all supply points.",
+      },
+      {
+        title: "Safety Commitment",
+        desc: "Maintaining strict safety standards in storage, transport, and bunker operations to ensure secure and uninterrupted fuel supply.",
+      },
+    ];
+
+    const swiper = new window.Swiper(".mySwiper", {
+      slidesPerView: 3,
+      centeredSlides: true,
+      loop: true,
+      loopedSlides: 5,
+      spaceBetween: 40,
+      autoplay: {
+        delay: 4500,
+        disableOnInteraction: false,
+      },
+      navigation: {
+        nextEl: ".next",
+        prevEl: ".prev",
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      on: {
+        slideChange: function (this: any) {
+          const realIndex = this.realIndex;
+          const textWrap = document.getElementById("value-text");
+
+          if (textWrap) {
+            textWrap.innerHTML = `
+              <h3 class="text-3xl font-semibold mb-4">
+                ${data[realIndex].title}
+              </h3>
+              <p class="text-white/90 leading-relaxed min-h-20">
+                ${data[realIndex].desc}
+              </p>
+            `;
+          }
+        },
+      },
+    });
+  });
+</script>

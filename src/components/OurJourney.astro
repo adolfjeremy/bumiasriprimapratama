@@ -1,0 +1,66 @@
+---
+import { Image } from "astro:assets";
+import quote from "../assets/images/quote-icon.png";
+import tommySuharto from "../assets/images/hutomo-mandala-putra.png";
+---
+
+<section
+  class="px-[16px] md:px-[64px] lg:px-[80px] py-[64px] md:py-[80px] bg-white"
+>
+  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <!-- LEFT QUOTE -->
+    <div class="relative">
+      <p class="text-gray-700 leading-relaxed text-[16px] md:text-[17px] mb-6">
+        Since its establishment, BAPP has focused on building a resilient fuel
+        supply platform supported by experienced leadership and next-generation
+        operational management. Through multiple market cycles, the company has
+        strengthened its supply chain network and strategic positioning to
+        support Indonesia’s industrial and marine growth.
+      </p>
+      <Image src={quote} alt="quote icon" class="w-12 h-12" />
+
+      <p class="text-gray-700 leading-relaxed text-[16px] md:text-[17px] mb-3">
+        “Operational discipline, supply reliability, and structured governance
+        form the foundation of our fuel distribution operations across
+        Indonesia.”
+      </p>
+
+      <div class="flex items-center gap-4">
+        <Image
+          src={tommySuharto}
+          alt="Hutomo Mandala Putra"
+          class="w-12 h-12 rounded-full object-cover"
+        />
+        <div>
+          <p class="font-semibold text-gray-900">Hutomo Mandala Putra</p>
+          <p class="text-sm text-gray-500">President Director</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT CARD -->
+    <div class="bg-[#018FF5] text-white rounded-2xl p-8 md:p-10 shadow-lg">
+      <h3 class="text-2xl font-semibold mb-6">Our Journey</h3>
+
+      <p class="leading-relaxed mb-4 text-white/90">
+        Founded in 2004, BAPP began as a focused fuel supply operator serving
+        selected industrial clients. Over time, the company expanded its
+        operational footprint to serve marine, offshore, and mining sectors,
+        supported by improved logistics systems and supply infrastructure.
+      </p>
+
+      <p class="leading-relaxed mb-6 text-white/90">
+        TToday, BAPP operates with structured governance oversight, strengthened
+        financial discipline, and operational expansion through strategic fuel
+        storage and floating storage facilities.
+      </p>
+
+      <a
+        href="/contact"
+        class="inline-block bg-white text-[#018FF5] font-medium px-6 py-3 rounded-lg hover:bg-gray-100 transition"
+      >
+        Contact Us
+      </a>
+    </div>
+  </div>
+</section>

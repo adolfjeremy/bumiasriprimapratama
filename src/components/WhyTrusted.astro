@@ -1,0 +1,146 @@
+---
+import { Image } from "astro:assets";
+import imageBg from "../assets/images/trusted_bg.png";
+---
+
+<section class="relative py-[120px] text-white overflow-hidden">
+  <!-- Background -->
+  <Image
+    src={imageBg}
+    alt="ships parking"
+    class="absolute inset-0 w-full h-full object-cover"
+    quality={90}
+    format="webp"
+    loading="eager"
+    fetchpriority="high"
+  />
+  <div
+    class="absolute inset-0 bg-gradient-to-t
+  from-[#081c33]/95
+  via-[#0c2b4a]/70
+  to-transparent"
+  >
+  </div>
+
+  <div
+    class="relative px-[16px] md:px-[64px] lg:px-[100px] max-w-[1400px] mx-auto"
+  >
+    <!-- Section Label -->
+    <p class="uppercase tracking-[3px] text-sm text-white/60 mb-4">
+      Competitive Advantage
+    </p>
+
+    <h2
+      class="text-4xl md:text-5xl font-semibold leading-tight mb-20 max-w-3xl"
+    >
+      Why BAPP Trusted by Industry Leaders
+    </h2>
+
+    <div class="grid lg:grid-cols-3 gap-8">
+      <!-- Card 1 -->
+      <div class="rounded-2xl bg-white/10 backdrop-blur-md p-8">
+        <h3 class="text-xl font-semibold mb-4">
+          Nationwide Fuel Distribution Network
+        </h3>
+
+        <p class="text-white/80 leading-relaxed">
+          Extensive distribution capabilities serving industrial, marine,
+          offshore, and mining sectors across Indonesia with reliable supply
+          scheduling and strategic logistics planning.
+        </p>
+
+        <div class="mt-6 pt-6 border-t border-white/20">
+          <p class="text-xs uppercase tracking-widest text-white/60">
+            Nationwide coverage • On-time delivery • Demand-based allocation
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="rounded-2xl bg-white/10 backdrop-blur-md p-8">
+        <h3 class="text-xl font-semibold mb-4">
+          Strategic Marine Infrastructure & FSU
+        </h3>
+
+        <p class="text-white/80 leading-relaxed">
+          Floating Storage Units and Ship-to-Ship operations positioned in key
+          maritime corridors, enabling flexible and efficient fuel deployment in
+          high-demand marine routes.
+        </p>
+
+        <div class="mt-6 pt-6 border-t border-white/20">
+          <p class="text-xs uppercase tracking-widest text-white/60">
+            Eastern Indonesia maritime fuel deployment hub
+          </p>
+        </div>
+      </div>
+
+      <!-- Highlight Card -->
+
+      <div
+        class="rounded-2xl bg-[#018FF5] p-10 row-span-2 text-white shadow-2xl"
+      >
+        <h3 class="text-2xl font-semibold mb-6">
+          A Long-Term Energy Partner You Can Rely On
+        </h3>
+
+        <p class="text-white/90 leading-relaxed mb-6">
+          Since 2004, BAPP has consistently delivered stable fuel supply
+          performance across multiple market cycles, strengthening relationships
+          with industrial and maritime partners nationwide.
+        </p>
+
+        <p class="text-white/80 leading-relaxed mb-8">
+          Our disciplined operational standards, integrated sourcing strategy,
+          and experienced leadership ensure dependable energy solutions with
+          measurable operational impact.
+        </p>
+
+        <a
+          href="#contact"
+          class="inline-block bg-white text-blue-600 font-medium px-6 py-3 rounded-lg hover:bg-gray-100 transition"
+        >
+          Request Quotation
+        </a>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="rounded-2xl bg-white/10 backdrop-blur-md p-8">
+        <h3 class="text-xl font-semibold mb-4">
+          Operational Integrity & Regulatory Compliance
+        </h3>
+
+        <p class="text-white/80 leading-relaxed">
+          Strict adherence to safety protocols, regulatory standards, and
+          disciplined fuel handling procedures to maintain operational
+          continuity and mitigate risk.
+        </p>
+
+        <div class="mt-6 pt-6 border-t border-white/20">
+          <p class="text-xs uppercase tracking-widest text-white/60">
+            Safety-driven operations • Structured compliance framework
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="rounded-2xl bg-white/10 backdrop-blur-md p-8">
+        <h3 class="text-xl font-semibold mb-4">
+          Integrated Supply Chain & Global Partnerships
+        </h3>
+
+        <p class="text-white/80 leading-relaxed">
+          Strategic sourcing partnerships and logistics coordination enabling
+          competitive pricing, stable supply access, and consistent service
+          delivery.
+        </p>
+
+        <div class="mt-6 pt-6 border-t border-white/20">
+          <p class="text-xs uppercase tracking-widest text-white/60">
+            Stable sourcing • Competitive pricing • Reliable access
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
