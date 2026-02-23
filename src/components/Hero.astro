@@ -1,7 +1,13 @@
 ---
 import { Image } from "astro:assets";
 import Button from "./Button.astro";
-const { title, subtitle, background, alt = "image" } = Astro.props;
+const {
+  title,
+  subtitle,
+  background,
+  alt = "image",
+  isButton = true,
+} = Astro.props;
 ---
 
 <section
@@ -26,8 +32,12 @@ const { title, subtitle, background, alt = "image" } = Astro.props;
       {subtitle}
     </p>
 
-    <div class="mt-8">
-      <Button href="/contact" text="Request Quotation" />
-    </div>
+    {
+      isButton && (
+        <div class="mt-8">
+          <Button href="/contact" text="Request Quotation" />
+        </div>
+      )
+    }
   </div>
 </section>

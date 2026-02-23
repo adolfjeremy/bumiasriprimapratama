@@ -11,37 +11,101 @@ import ServiceCTA from "../components/ServiceCTA.astro";
 const schema = [
   {
     "@context": "https://schema.org",
-    "@type": "Service",
-    name: "Fuel Distribution Indonesia",
-    provider: {
-      "@type": "Organization",
-      name: "PT Bumi Asri Prima Pratama",
-      url: "https://bumiasriprimapratama.com",
-    },
-    areaServed: {
-      "@type": "Country",
-      name: "Indonesia",
-    },
-    serviceType: [
-      "High Speed Diesel (HSD) Trading",
-      "Marine Fuel Oil (MFO) Supply",
-      "Bunker Services & Ship-to-Ship (STS)",
-      "Floating Storage Unit (FSU)",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://bumiasriprimapratama.com/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Services",
+        item: "https://bumiasriprimapratama.com/services/",
+      },
     ],
-    description:
-      "Integrated fuel distribution services across Indonesia serving industrial, marine, offshore, and mining sectors.",
+  },
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://bumiasriprimapratama.com/#organization",
+        name: "PT Bumi Asri Prima Pratama",
+        url: "https://bumiasriprimapratama.com",
+        logo: "https://bumiasriprimapratama.com/images/logo.png",
+      },
+
+      {
+        "@type": "Service",
+        "@id": "https://bumiasriprimapratama.com/services/#hsd",
+        name: "High Speed Diesel (HSD) Trading",
+        serviceType: "Bulk fuel trading and industrial diesel supply",
+        provider: {
+          "@id": "https://bumiasriprimapratama.com/#organization",
+        },
+        areaServed: {
+          "@type": "Country",
+          name: "Indonesia",
+        },
+      },
+
+      {
+        "@type": "Service",
+        "@id": "https://bumiasriprimapratama.com/services/#mfo",
+        name: "Marine Fuel Oil (MFO) Supply",
+        serviceType: "Marine fuel supply for shipping and offshore operations",
+        provider: {
+          "@id": "https://bumiasriprimapratama.com/#organization",
+        },
+        areaServed: {
+          "@type": "Country",
+          name: "Indonesia",
+        },
+      },
+
+      {
+        "@type": "Service",
+        "@id": "https://bumiasriprimapratama.com/services/#sts",
+        name: "Ship-to-Ship (STS) Bunker Services",
+        serviceType: "Offshore bunker operations and marine fuel transfer",
+        provider: {
+          "@id": "https://bumiasriprimapratama.com/#organization",
+        },
+        areaServed: {
+          "@type": "Country",
+          name: "Indonesia",
+        },
+      },
+
+      {
+        "@type": "Service",
+        "@id": "https://bumiasriprimapratama.com/services/#fsu",
+        name: "Floating Storage Unit (FSU) Infrastructure",
+        serviceType: "Floating fuel storage and regional supply stabilization",
+        provider: {
+          "@id": "https://bumiasriprimapratama.com/#organization",
+        },
+        areaServed: {
+          "@type": "Country",
+          name: "Indonesia",
+        },
+      },
+    ],
   },
 ];
 ---
 
 <BaseLayout
-  title="Fuel Distribution Indonesia | Marine & Industrial Fuel Supply – BAPP"
-  description="PT Bumi Asri Prima Pratama provides fuel distribution services across Indonesia including High Speed Diesel (HSD), Marine Fuel Oil (MFO), bunker services, and Floating Storage Unit (FSU) infrastructure."
+  title="Marine Fuel & Bunker Services Indonesia | HSD Trading & FSU Infrastructure"
+  description="Integrated marine fuel, HSD trading, bunker services, ship-to-ship operations, and floating storage infrastructure supporting industrial and maritime sectors across Indonesia."
   schema={schema}
 >
   <Hero
-    title="Fuel Distribution Indonesia for Industrial & Marine Operations"
-    subtitle="Delivering High Speed Diesel (HSD), Marine Fuel Oil (MFO), Ship-to-Ship (STS) bunker operations, and strategic floating storage solutions across Indonesia’s industrial and maritime corridors."
+    title="Integrated HSD, Marine Fuel & Bunker Services in Indonesia"
+    subtitle="Delivering High Speed Diesel (HSD), Marine Fuel Oil (MFO), Ship-to-Ship (STS) bunker operations, and floating storage infrastructure supporting industrial and maritime sectors nationwide."
     background={servicesBg}
   />
   <StrategicOverview />

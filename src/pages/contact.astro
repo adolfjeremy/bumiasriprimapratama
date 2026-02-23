@@ -2,8 +2,38 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import contactBg from "../assets/images/contact-us-bg.png";
+import ContactForm from "../components/ContactForm.astro";
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name: "Contact PT Bumi Asri Prima Pratama",
+    url: "https://bumiasriprimapratama.com/contact/",
+    mainEntity: {
+      "@type": "Organization",
+      name: "PT Bumi Asri Prima Pratama",
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+62-813-1034-402",
+        contactType: "sales",
+        areaServed: "Indonesia",
+        availableLanguage: "English",
+      },
+    },
+  },
+];
 ---
 
-<BaseLayout>
-  <Hero title="Coming Soon" background={contactBg} />
+<BaseLayout
+  title="Contact PT Bumi Asri Prima Pratama | Fuel & Marine Service Inquiry"
+  description="Contact PT Bumi Asri Prima Pratama (BAPP) for High Speed Diesel trading, marine fuel supply, bunker services, and floating storage coordination across Indonesia."
+  schema={schema}
+>
+  <Hero
+    title="Contact PT Bumi Asri Prima Pratama"
+    subtitle="For fuel trading inquiries, marine bunker coordination, or operational collaboration, our commercial and technical teams are ready to assist."
+    background={contactBg}
+    isButton={false}
+  />
+  <ContactForm />
 </BaseLayout>
