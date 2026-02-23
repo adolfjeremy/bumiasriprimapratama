@@ -5,7 +5,7 @@ const {
   image = "/og-image.jpg",
   url = Astro.url.pathname,
   type = "website",
-  schema
+  schema, schema2
 } = Astro.props;
 
 const fullUrl = `https://bumiasriprimapratama.com${url}`;
@@ -47,6 +47,11 @@ import "../styles/global.css";
     <link rel="icon" href="/favicon.ico" />
     <!-- Schema Injection -->
     {schema && (
+      <script type="application/ld+json">
+        {JSON.stringify(schema)}
+      </script>
+    )}
+    {schema2 && (
       <script type="application/ld+json">
         {JSON.stringify(schema)}
       </script>

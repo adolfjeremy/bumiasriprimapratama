@@ -9,27 +9,31 @@ const services = [
   {
     image: hsd.src,
     title: "High Speed Diesel (HSD) Trading",
-    desc: "Reliable supply of High Speed Diesel to support industrial, mining, transportation, and marine operations across Indonesia.",
+    desc: "Reliable HSD supply supporting industrial, mining, transportation, and marine operations across Indonesia.",
+    alt:"High Speed Diesel distribution truck Indonesia"
   },
   {
     image: mfo.src,
     title: "Marine Fuel Oil (MFO) Supply",
-    desc: "Provision of Marine Fuel Oil for domestic and international shipping, offshore vessels, and fishing fleets operating within Indonesian waters.",
+    desc: "Provision of Biosolar B40, LSFO 180/380, and HSFO 180/380 for domestic and international shipping operations.",
+    alt:"Marine Fuel Oil storage and delivery in Indonesia"
   },
   {
     image: sts.src,
     title: "Bunker Services & Ship-to-Ship (STS)",
-    desc: "Comprehensive bunker and ship-to-ship transfer services ensuring efficient offshore fuel delivery with strict compliance and operational safety.",
+    desc: "Professional bunker and ship-to-ship transfer services ensuring safe, compliant, and efficient offshore fuel delivery.",
+    alt:"Bunker and Ship-to-Ship transfer services in Indonesia"
   },
   {
     image: fsu.src,
     title: "Floating Storage Unit (FSU)",
-    desc: "Strategic Floating Storage Unit in NTT enabling efficient fuel supply to eastern Indonesian maritime corridors.",
+    desc: "Strategic floating storage infrastructure in NTT enabling responsive marine fuel distribution in high-demand routes.",
+    alt:"Floating Storage Unit for marine fuel distribution in Indonesia"
   },
 ];
 ---
 
-<section class="relative py-[100px] text-white overflow-hidden">
+<section class="relative py-16 md:py-20 text-white overflow-hidden">
 
   <!-- Background -->
   <Image
@@ -46,7 +50,7 @@ const services = [
   <div class="relative px-[16px] md:px-[64px] lg:px-[80px]">
 
     <!-- Title -->
-    <h2 class="text-center text-4xl md:text-5xl font-semibold mb-20">
+    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center leading-tights mb-20">
       Our Services
     </h2>
 
@@ -58,7 +62,7 @@ const services = [
 
           <img
             src={service.image}
-            alt={service.title}
+            alt={service.alt}
             class="w-full h-[420px] object-cover transition-transform duration-700 group-hover:scale-110"
           />
 
