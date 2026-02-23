@@ -47,11 +47,12 @@ import "../styles/global.css";
     <link rel="icon" href="/logo-sm.png" />
     <!-- Schema Injection -->
     {
-      schema.map((item: any) => {
-        const schemaItem = JSON.stringify(item);
+      schema &&
+        schema.map((item: any) => {
+          const schemaItem = JSON.stringify(item);
 
-        return <script type="application/ld+json" set:html={schemaItem} />;
-      })
+          return <script type="application/ld+json" set:html={schemaItem} />;
+        })
     }
   </head>
 
