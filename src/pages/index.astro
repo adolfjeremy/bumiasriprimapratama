@@ -13,42 +13,42 @@ import Credential from "../components/Credential.astro";
 
 import heroImage from "../assets/images/hero_home.png";
 
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "PT Bumi Asri Prima Pratama",
-  url: "https://bumiasriprimapratama.com",
-  logo: "https://bumiasriprimapratama.com/logo.png",
-  foundingDate: "2004",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Gedung Granadi Lt. 3 Sayap Utara, Jl. H.R. Rasuna Said",
-    addressLocality: "Jakarta Selatan",
-    addressCountry: "Indonesia",
-  },
-  sameAs: [],
-};
-
-const schema2 = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  serviceType: "Fuel Distribution and Marine Bunker Services",
-  provider: {
+const schema = [
+  {
+    "@context": "https://schema.org",
     "@type": "Organization",
     name: "PT Bumi Asri Prima Pratama",
+    url: "https://bumiasriprimapratama.com",
+    logo: "https://bumiasriprimapratama.com/logo.png",
+    foundingDate: "2004",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Gedung Granadi Lt. 3 Sayap Utara, Jl. H.R. Rasuna Said",
+      addressLocality: "Jakarta Selatan",
+      addressCountry: "Indonesia",
+    },
+    sameAs: [],
   },
-  areaServed: {
-    "@type": "Country",
-    name: "Indonesia",
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "Fuel Distribution and Marine Bunker Services",
+    provider: {
+      "@type": "Organization",
+      name: "PT Bumi Asri Prima Pratama",
+    },
+    areaServed: {
+      "@type": "Country",
+      name: "Indonesia",
+    },
   },
-};
+];
 ---
 
 <BaseLayout
   title="Fuel Distribution & Marine Bunker Services Indonesia | PT Bumi Asri Prima Pratama"
   description="PT Bumi Asri Prima Pratama (BAPP) provides High Speed Diesel (HSD), Marine Fuel Oil (MFO), bunker services, and Ship-to-Ship (STS) operations across Indonesia with strategic storage and nationwide distribution coverage."
   schema={schema}
-  schema2={schema2}
 >
   <Hero
     title="Fuel Distribution & Bunker Services Across Indonesia Since 2004"

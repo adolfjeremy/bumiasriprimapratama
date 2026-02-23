@@ -8,28 +8,30 @@ import Operational from "../components/Operational.astro";
 import CoverageDelivery from "../components/CoverageDelivery.astro";
 import ServiceCTA from "../components/ServiceCTA.astro";
 
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  name: "Fuel Distribution Indonesia",
-  provider: {
-    "@type": "Organization",
-    name: "PT Bumi Asri Prima Pratama",
-    url: "https://bumiasriprimapratama.com",
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Fuel Distribution Indonesia",
+    provider: {
+      "@type": "Organization",
+      name: "PT Bumi Asri Prima Pratama",
+      url: "https://bumiasriprimapratama.com",
+    },
+    areaServed: {
+      "@type": "Country",
+      name: "Indonesia",
+    },
+    serviceType: [
+      "High Speed Diesel (HSD) Trading",
+      "Marine Fuel Oil (MFO) Supply",
+      "Bunker Services & Ship-to-Ship (STS)",
+      "Floating Storage Unit (FSU)",
+    ],
+    description:
+      "Integrated fuel distribution services across Indonesia serving industrial, marine, offshore, and mining sectors.",
   },
-  areaServed: {
-    "@type": "Country",
-    name: "Indonesia",
-  },
-  serviceType: [
-    "High Speed Diesel (HSD) Trading",
-    "Marine Fuel Oil (MFO) Supply",
-    "Bunker Services & Ship-to-Ship (STS)",
-    "Floating Storage Unit (FSU)",
-  ],
-  description:
-    "Integrated fuel distribution services across Indonesia serving industrial, marine, offshore, and mining sectors.",
-};
+];
 ---
 
 <BaseLayout

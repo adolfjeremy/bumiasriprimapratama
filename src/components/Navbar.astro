@@ -1,5 +1,5 @@
 ---
-import logo from "../assets/images/logo-bapp.png";
+import logo from "../assets/images/logo.png";
 import Button from "./Button.astro";
 const pathname = Astro.url.pathname;
 const links = [
@@ -37,7 +37,7 @@ const isActive = (href: string) =>
 
     <!-- CTA -->
     <div class="hidden lg:block">
-      <Button text="Request Quotation" />
+      <Button text="Company Profile" href="/compro-bapp.pdf" />
     </div>
 
     <!-- MOBILE MENU BUTTON -->
@@ -81,7 +81,7 @@ const isActive = (href: string) =>
       </nav>
 
       <!-- CTA -->
-      <Button text="Request Quotation" />
+      <Button text="Company Profile" href="/compro-bapp.pdf" />
     </div>
   </div>
 </header>
