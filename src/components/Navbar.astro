@@ -53,8 +53,12 @@ const isActive = (href: string) =>
   </div>
 
   <!-- MOBILE DRAWER -->
-  <div id="drawer" class="fixed inset-0 z-50 hidden">
-    <div id="backdrop" class="absolute inset-0 bg-black/50"></div>
+  <div id="drawer" class="fixed top-0 bottom-0 left-0 h-[100svh] z-50 hidden">
+    <div
+      id="backdrop"
+      class="absolute inset-0 w-[100svw] h-[100svh] bg-black/50"
+    >
+    </div>
 
     <div
       id="drawerPanel"
@@ -131,8 +135,32 @@ const isActive = (href: string) =>
     throw new Error("Required DOM elements not found");
   }
 
+  let scrollY = 0;
+
+  function lockScroll() {
+    scrollY = window.scrollY;
+
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.width = "100%";
+  }
+
+  function unlockScroll() {
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.left = "";
+    document.body.style.right = "";
+    document.body.style.width = "";
+
+    window.scrollTo(0, scrollY);
+  }
+
   function openDrawer() {
     drawer!.classList.remove("hidden");
+
+    lockScroll();
 
     requestAnimationFrame(() => {
       drawerPanel!.classList.remove("-translate-x-full");
@@ -145,6 +173,8 @@ const isActive = (href: string) =>
     drawerPanel!.classList.add("-translate-x-full");
     drawerPanel!.classList.add("opacity-0");
     menuBtn!.classList.remove("is-open");
+
+    unlockScroll();
 
     setTimeout(() => {
       drawer!.classList.add("hidden");
@@ -160,4 +190,9 @@ const isActive = (href: string) =>
   });
 
   backdrop!.addEventListener("click", closeDrawer);
+
+  // close drawer when link clicked (mobile UX)
+  document.querySelectorAll(".mobile-nav a").forEach((link) => {
+    link.addEventListener("click", closeDrawer);
+  });
 </script>
