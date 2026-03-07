@@ -19,20 +19,22 @@ const {
   <Image
     src={background}
     alt={alt}
-    class="absolute inset-0 w-full h-full object-cover"
+    class="hero-bg absolute inset-0 w-full h-full object-cover"
     quality={70}
     format="webp"
     loading="eager"
     fetchpriority="high"
   />
 
+  <!-- gradient overlay -->
+  <div class="absolute inset-0 hero-overlay"></div>
+
   <!-- container -->
   <div class="relative z-10 w-full max-w-[1280px] mx-auto">
     <div
       class="max-w-xl md:max-w-2xl lg:max-w-3xl
       text-center lg:text-left
-      mx-auto lg:mx-0
-      text-white"
+      mx-auto lg:mx-0 text-white"
     >
       <h1
         class="text-[32px] md:text-[48px] lg:text-[60px]
@@ -59,3 +61,28 @@ const {
     </div>
   </div>
 </section>
+
+<style>
+  .hero-overlay {
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.65) 0%,
+      rgba(0, 0, 0, 0.45) 40%,
+      rgba(0, 0, 0, 0.2) 70%,
+      rgba(0, 0, 0, 0.1) 100%
+    );
+  }
+
+  .hero-bg {
+    animation: heroZoom 18s ease-in-out infinite alternate;
+  }
+
+  @keyframes heroZoom {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.08);
+    }
+  }
+</style>
