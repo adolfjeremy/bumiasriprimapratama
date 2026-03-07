@@ -27,33 +27,23 @@ const {
   />
 
   <!-- gradient overlay -->
-  <div class="absolute inset-0 hero-overlay"></div>
 
   <!-- container -->
   <div class="relative z-10 w-full max-w-[1280px] mx-auto">
-    <div
-      class="max-w-xl md:max-w-2xl lg:max-w-3xl
-      text-center lg:text-left
-      mx-auto lg:mx-0 text-white"
-    >
-      <h1
-        class="text-[32px] md:text-[48px] lg:text-[60px]
-        font-semibold leading-[1.15] tracking-tight"
-      >
+    <div class="max-w-[820px]
+      text-left
+      mx-auto lg:mx-0 text-white">
+      <h1 class="hero-title">
         {title}
       </h1>
 
-      <p
-        class="mt-6 text-[16px] md:text-[18px]
-        text-gray-200 leading-relaxed
-        max-w-xl mx-auto lg:mx-0"
-      >
+      <p class="hero-subtitle">
         {subtitle}
       </p>
 
       {
         isButton && (
-          <div class="mt-10 flex justify-center lg:justify-start">
+          <div class="mt-10 flex justify-start lg:justify-start">
             <Button href="/contact" text="Request Quotation" />
           </div>
         )
@@ -63,6 +53,24 @@ const {
 </section>
 
 <style>
+  .hero-title {
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+
+    font-size: clamp(1.8rem, 3.2vw, 3rem);
+  }
+
+  .hero-subtitle {
+    margin-top: 1.5rem;
+    max-width: 640px;
+
+    font-size: clamp(0.9375rem, 1.25vw, 1.215rem);
+    line-height: 1.7;
+
+    color: rgb(229 231 235);
+  }
+
   .hero-overlay {
     background: linear-gradient(
       90deg,
