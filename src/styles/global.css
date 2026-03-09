@@ -6,6 +6,10 @@ body {
   font-style: normal;
 }
 
+section {
+  scroll-margin-top: 120px;
+}
+
 .nav_link {
   color: #fafafa;
   font-weight: 500;
@@ -14,4 +18,68 @@ body {
 
 .nav_link:hover {
   color: #0077cc;
+}
+
+/* base reveal */
+
+.reveal {
+  --reveal-x: 0px;
+  --reveal-y: 40px;
+  --reveal-scale: 0.98;
+  --reveal-delay: 0s;
+
+  opacity: 0;
+
+  transform: translate3d(var(--reveal-x), var(--reveal-y), 0)
+    scale(var(--reveal-scale));
+
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  transition-delay: var(--reveal-delay);
+
+  will-change: transform, opacity;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+/* directions */
+
+.reveal-left {
+  --reveal-x: -60px;
+  --reveal-y: 0px;
+}
+
+.reveal-right {
+  --reveal-x: 60px;
+  --reveal-y: 0px;
+}
+
+.reveal-up {
+  --reveal-y: 60px;
+}
+
+.reveal-zoom {
+  --reveal-scale: 0.9;
+}
+
+/* smooth rendering */
+
+.reveal {
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
