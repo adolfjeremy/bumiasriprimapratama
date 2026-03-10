@@ -6,9 +6,11 @@ import missionBg from "../assets/images/mission-bg.png";
 
 <section class="px-[16px] md:px-[64px] lg:px-[80px] pb-8">
   <div class="px-[16px] md:px-[64px] lg:px-[80px] mx-auto">
-    <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+    <div class="grid md:grid-cols-2 gap-8 lg:gap-12 reveal-group">
       <!-- VISION -->
-      <div class="relative rounded-3xl overflow-hidden group">
+      <div
+        class="relative rounded-3xl overflow-hidden group reveal reveal-zoom"
+      >
         <Image
           src={visionBg}
           alt="Fuel Distribution Vision"
@@ -35,7 +37,9 @@ import missionBg from "../assets/images/mission-bg.png";
       </div>
 
       <!-- MISSION -->
-      <div class="relative rounded-3xl overflow-hidden group">
+      <div
+        class="relative rounded-3xl overflow-hidden group reveal reveal-zoom"
+      >
         <Image
           src={missionBg}
           alt="Fuel Distribution Mission"

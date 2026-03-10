@@ -1,145 +1,452 @@
-<section class="py-16 md:py-20 md:pb-12 md:pt-6 bg-white">
-  <div class="max-w-6xl mx-auto px-6 text-center">
+---
+import tommy from "../assets/images/tommy.png";
+import heri from "../assets/images/heri.png";
+import sahriza from "../assets/images/sahriza.png";
+import tulus from "../assets/images/tulus.png";
+import sonia from "../assets/images/sonia.png";
+import anggoro from "../assets/images/anggoro.png";
+import faqih from "../assets/images/faqih.png";
+import yehezkiel from "../assets/images/yehezkiel.png";
+---
+
+<section class="py-16 md:py-20 bg-white">
+  <div class="max-w-6xl mx-auto px-6 text-center reveal-group">
     <h2
-      class="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0F172A] leading-tights mb-6"
+      class="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0F172A] mb-6 reveal reveal-up"
     >
       Structured Governance and Leadership
     </h2>
 
     <p
-      class="text-base md:text-lg text-slate-600 max-w-3xl mx-auto mb-12 md:mb-16"
+      class="text-base md:text-lg text-slate-600 max-w-3xl mx-auto mb-12 reveal reveal-up"
     >
       As a professionally managed Indonesian energy company, BAPP operates under
       structured governance oversight designed to ensure operational
-      transparency, accountability, and long-term sustainability. The company’s
-      leadership structure reinforces disciplined management practices,
-      strategic oversight, and operational continuity across all distribution
-      activities.
+      transparency, accountability, and long-term sustainability.
     </p>
 
-    <div class="w-full max-w-5xl mx-auto">
-      <svg
-        viewBox="0 0 1000 1000"
-        class="w-full h-auto lg:overflow-visible"
-        preserveAspectRatio="xMidYMid meet"
-      >
-        <defs>
-          <style>
-            .line {
-              stroke: #1e293b;
-              stroke-width: 4;
-            }
+    <div class="orgchart-wrapper reveal reveal-zoom">
+      <div class="orgchart">
+        <!-- NODES -->
 
-            .box {
-              fill: #0f2e4d;
-              transition:
-                transform 0.28s ease,
-                filter 0.28s ease;
-              transform-box: fill-box;
-              transform-origin: center;
-              cursor: default;
-            }
+        <div class="node owner">
+          <div class="card">
+            H. Hutomo Mandala Putra
+            <span>Owner</span>
+          </div>
+          <img src={tommy.src} class="popup" />
+        </div>
 
-            .box:hover {
-              transform: scale(1.05);
-              filter: drop-shadow(0px 12px 24px rgba(15, 23, 42, 0.28));
-            }
+        <div class="node prescom">
+          <div class="card">
+            Hery Mutohar
+            <span>President Commissioner</span>
+          </div>
+          <img src={heri.src} class="popup" />
+        </div>
 
-            .name {
-              fill: white;
-              font-size: 20px;
-              font-weight: 600;
-              text-anchor: middle;
-              pointer-events: none;
-            }
+        <div class="node com">
+          <div class="card">
+            Sah Riza Novantiar
+            <span>Commissioner</span>
+          </div>
+          <img src={sahriza.src} class="popup" />
+        </div>
 
-            .role {
-              fill: white;
-              font-size: 16px;
-              text-anchor: middle;
-              opacity: 0.85;
-              pointer-events: none;
-            }
+        <div class="node auditor">
+          <div class="card">Internal Audit</div>
+        </div>
 
-            @media (max-width: 768px) {
-              .name {
-                font-size: 16px;
-              }
-              .role {
-                font-size: 13px;
-              }
-            }
-          </style>
-        </defs>
+        <div class="node presdir">
+          <div class="card">
+            Tulus Widaryanto
+            <span>President Director</span>
+          </div>
+          <img src={tulus.src} class="popup" />
+        </div>
 
-        <!-- Owner -->
-        <rect class="box" x="350" y="0" width="300" height="90" rx="20"></rect>
-        <text class="name" x="500" y="40">H. Hutomo Mandala Putra</text>
-        <text class="role" x="500" y="65">Owner</text>
-        <line class="line" x1="500" y1="90" x2="500" y2="140"></line>
+        <div class="node opdir">
+          <div class="card">
+            Sonia Balqis Anshori
+            <span>Operation Director</span>
+          </div>
+          <img src={sonia.src} class="popup" />
+        </div>
 
-        <!-- President Commissioner -->
-        <rect class="box" x="350" y="140" width="300" height="100" rx="20"
-        ></rect>
-        <text class="name" x="500" y="185">Hery Mutohar</text>
-        <text class="role" x="500" y="210">President Commissioner</text>
-        <line class="line" x1="500" y1="240" x2="500" y2="300"></line>
+        <div class="node tcdir">
+          <div class="card">
+            Anggoro Ibnu Baskoro
+            <span>Technical & Commercial Director</span>
+          </div>
+          <img src={anggoro.src} class="popup" />
+        </div>
 
-        <!-- Commissioner -->
-        <rect class="box" x="350" y="300" width="300" height="100" rx="20"
-        ></rect>
-        <text class="name" x="500" y="345">Sah Riza Novantiar</text>
-        <text class="role" x="500" y="370">Commissioner</text>
-        <line class="line" x1="500" y1="400" x2="500" y2="460"></line>
+        <div class="node gmfin">
+          <div class="card">
+            Faqih Fauzi
+            <span>GM Finance</span>
+          </div>
+          <img src={faqih.src} class="popup" />
+        </div>
 
-        <!-- Internal Auditor -->
-        <line class="line" x1="500" y1="460" x2="280" y2="460"></line>
-        <rect class="box" x="0" y="410" width="280" height="100" rx="20"></rect>
-        <text class="name" x="140" y="460">Internal Auditor</text>
+        <div class="node gmsup">
+          <div class="card">
+            Yehezikel Yonathan
+            <span>GM Supply Chain</span>
+          </div>
+          <img src={yehezkiel.src} class="popup" />
+        </div>
 
-        <line class="line" x1="500" y1="460" x2="500" y2="520"></line>
+        <!-- LINES -->
 
-        <!-- President Director -->
-        <rect class="box" x="350" y="520" width="300" height="100" rx="20"
-        ></rect>
-        <text class="name" x="500" y="565">Tulus Widaryanto</text>
-        <text class="role" x="500" y="590">President Director</text>
+        <div class="line v1"></div>
+        <div class="line v2"></div>
+        <div class="line v3"></div>
 
-        <line class="line" x1="500" y1="620" x2="500" y2="680"></line>
+        <div class="line h1"></div>
+        <div class="line h2"></div>
 
-        <!-- Split -->
-        <line class="line" x1="200" y1="680" x2="800" y2="680"></line>
-        <line class="line" x1="200" y1="680" x2="200" y2="730"></line>
-        <line class="line" x1="800" y1="680" x2="800" y2="730"></line>
+        <div class="line v4"></div>
+        <div class="line v5"></div>
 
-        <!-- Left Director -->
-        <rect class="box" x="50" y="730" width="300" height="100" rx="20"
-        ></rect>
-        <text class="name" x="200" y="775">Sonia Balqis Anshori</text>
-        <text class="role" x="200" y="800">Operation Director</text>
-
-        <!-- Right Director -->
-        <rect class="box" x="650" y="730" width="300" height="100" rx="20"
-        ></rect>
-        <text class="name" x="800" y="775">Anggoro Ibnu Baskoro</text>
-        <text class="role" x="800" y="800">Technical & Commercial Director</text
-        >
-
-        <line class="line" x1="200" y1="830" x2="200" y2="880"></line>
-        <line class="line" x1="800" y1="830" x2="800" y2="880"></line>
-
-        <!-- GM Finance -->
-        <rect class="box" x="50" y="880" width="300" height="100" rx="20"
-        ></rect>
-        <text class="name" x="200" y="925">Faqih Fauzi</text>
-        <text class="role" x="200" y="950">GM Finance</text>
-
-        <!-- GM Supply Chain -->
-        <rect class="box" x="650" y="880" width="300" height="100" rx="20"
-        ></rect>
-        <text class="name" x="800" y="925">Yehezikel Yonathan</text>
-        <text class="role" x="800" y="950">GM Supply Chain</text>
-      </svg>
+        <div class="line v6"></div>
+        <div class="line v7"></div>
+        <div class="line v8"></div>
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  /* WRAPPER */
+
+  .orgchart-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* CHART */
+
+  .orgchart {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    aspect-ratio: 1000 / 1000;
+    margin: auto;
+  }
+
+  /* CARD */
+
+  .card {
+    width: 100%;
+    box-sizing: border-box;
+    word-break: break-word;
+
+    background: #0f2e4d;
+    color: white;
+    padding: 1.2vw 1vw;
+    border-radius: 20px;
+    font-weight: 600;
+    text-align: center;
+    font-size: clamp(12px, 1vw, 16px);
+  }
+
+  .card span {
+    display: block;
+    opacity: 0.85;
+    font-weight: 400;
+    margin-top: 4px;
+  }
+
+  /* NODE */
+
+  .node {
+    position: absolute;
+    width: 30%;
+    max-width: 300px;
+    z-index: 2;
+  }
+
+  /* NODE POSITIONS */
+
+  .owner {
+    top: 0%;
+    left: 35%;
+  }
+
+  .prescom {
+    top: 13%;
+    left: 35%;
+  }
+
+  .com {
+    top: 26%;
+    left: 35%;
+  }
+
+  .auditor {
+    top: 38%;
+    left: 5%;
+  }
+
+  .presdir {
+    top: 47%;
+    left: 35%;
+  }
+
+  .opdir {
+    top: 65%;
+    left: 5%;
+  }
+
+  .tcdir {
+    top: 65%;
+    left: 65%;
+  }
+
+  .gmfin {
+    top: 76.4%;
+    left: 5%;
+  }
+
+  .gmsup {
+    top: 76.4%;
+    left: 65%;
+  }
+
+  /* LINES */
+
+  .line {
+    position: absolute;
+    background: #1e293b;
+    z-index: 1;
+  }
+
+  /* vertical */
+
+  .v1 {
+    left: 50%;
+    top: 6.3%;
+    width: 0.35%;
+    height: 6.8%;
+  }
+
+  .v2 {
+    left: 50%;
+    top: 19.2%;
+    width: 0.35%;
+    height: 6.8%;
+  }
+
+  .v3 {
+    left: 50%;
+    top: 32.4%;
+    width: 0.35%;
+    height: 16%;
+  }
+
+  .v4 {
+    left: 50%;
+    top: 53.5%;
+    width: 0.35%;
+    height: 6.5%;
+  }
+
+  .v5 {
+    left: 20%;
+    top: 60%;
+    width: 0.35%;
+    height: 5%;
+  }
+
+  .v6 {
+    left: 80%;
+    top: 60%;
+    width: 0.35%;
+    height: 5%;
+  }
+
+  .v7 {
+    left: 20%;
+    top: 71.5%;
+    width: 0.35%;
+    height: 5%;
+  }
+
+  .v8 {
+    left: 80%;
+    top: 71.5%;
+    width: 0.35%;
+    height: 5%;
+  }
+
+  /* horizontal */
+
+  .h1 {
+    left: 20%;
+    top: 60%;
+    width: 60%;
+    height: 0.35%;
+  }
+
+  .h2 {
+    left: 30%;
+    top: 40%;
+    width: 20%;
+    height: 0.35%;
+  }
+
+  /* POPUP */
+
+  .popup {
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    width: 240px;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 14px;
+
+    transform: translate(-50%, 30px) scale(0.9);
+    opacity: 0;
+    transition: all 0.18s ease;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .node:hover .popup {
+    opacity: 1;
+    transform: translate(-50%, -20px) scale(1);
+  }
+
+  .node.active .popup {
+    opacity: 1;
+    transform: translate(-50%, -20px) scale(1);
+  }
+
+  /* MOBILE */
+
+  @media (max-width: 768px) {
+    .orgchart {
+      aspect-ratio: 1000 / 1750;
+    }
+
+    .node {
+      width: 40%;
+      max-width: none;
+    }
+
+    .card {
+      padding: 20px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      line-height: 1.3;
+      cursor: pointer;
+    }
+
+    .card span {
+      font-size: 10px;
+      margin-top: 2px;
+      cursor: pointer;
+    }
+
+    .auditor .card {
+      padding: 6px 10px;
+      font-size: 10px;
+    }
+
+    .v7 {
+      left: 20%;
+      top: 75%;
+      width: 0.35%;
+      height: 5%;
+    }
+
+    .v8 {
+      left: 80%;
+      top: 75%;
+      width: 0.35%;
+      height: 5%;
+    }
+
+    .popup {
+      width: 150px;
+      height: 200px;
+    }
+    .owner {
+      top: 0%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .prescom {
+      top: 13%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .com {
+      top: 26%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .auditor {
+      top: 38%;
+      left: 0%;
+    }
+
+    .presdir {
+      top: 47%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .opdir {
+      top: 65%;
+      left: 0%;
+    }
+
+    .tcdir {
+      top: 65%;
+      left: 100%;
+      transform: translateX(-100%);
+    }
+
+    .gmfin {
+      top: 80%;
+      left: 0%;
+    }
+
+    .gmsup {
+      top: 80%;
+      left: 100%;
+      transform: translateX(-100%);
+    }
+  }
+</style>
+
+<script>
+  const isMobile = window.matchMedia("(max-width:768px)").matches;
+
+  if (isMobile) {
+    document.querySelectorAll(".node").forEach((node) => {
+      node.addEventListener("click", (e) => {
+        e.stopPropagation();
+
+        document.querySelectorAll(".node").forEach((n) => {
+          if (n !== node) n.classList.remove("active");
+        });
+
+        node.classList.toggle("active");
+      });
+    });
+
+    document.addEventListener("click", () => {
+      document
+        .querySelectorAll(".node")
+        .forEach((n) => n.classList.remove("active"));
+    });
+  }
+</script>

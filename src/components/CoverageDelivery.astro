@@ -4,24 +4,27 @@ import coverageArea from "../assets/images/coverages.png";
 ---
 
 <section class="py-24 md:py-32 bg-[#F8FAFC]">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="text-center max-w-3xl mx-auto mb-16">
+  <div class="max-w-7xl mx-auto px-6 reveal-group">
+    <div class="text-center max-w-3xl mx-auto mb-16 reveal-group">
       <h2
-        class="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0F172A] leading-tights mb-6"
+        class="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0F172A] leading-tights mb-6 reveal reveal-up"
       >
         Strategic Fuel Network Across Key Indonesian Corridors
       </h2>
-      <div class="w-20 h-[3px] bg-[#0077cc] mx-auto rounded-full mb-6"></div>
-      <p class="text-lg text-slate-600 leading-relaxed">
+      <div
+        class="w-20 h-[3px] bg-[#0077cc] mx-auto rounded-full mb-6 reveal reveal-zoom"
+      >
+      </div>
+      <p class="text-lg text-slate-600 leading-relaxed reveal reveal-up">
         BAPP maintains strategically positioned distribution points and storage
         assets across key industrial and maritime corridors in Indonesia.
       </p>
-      <p class="text-lg text-slate-600 leading-relaxed">
+      <p class="text-lg text-slate-600 leading-relaxed reveal reveal-up">
         This geographic positioning enables faster response time, stable bulk
         fuel allocation, and coordinated supply coverage across western,
         central, and eastern regions.
       </p>
-      <p class="text-lg text-slate-600 leading-relaxed">
+      <p class="text-lg text-slate-600 leading-relaxed reveal reveal-up">
         Distribution and storage points include Sumatra, Kalimantan, Sulawesi,
         Java corridors, and FSU deployment in NTT supporting eastern maritime
         logistics.
@@ -29,7 +32,7 @@ import coverageArea from "../assets/images/coverages.png";
     </div>
 
     <!-- MAP IMAGE -->
-    <div class="mb-16">
+    <div class="mb-16 reveal reveal-zoom">
       <Image
         src={coverageArea}
         alt="Fuel distribution network map showing Sumatra, Java, Kalimantan, Bali and NTT coverage"
