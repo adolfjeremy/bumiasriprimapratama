@@ -1,18 +1,10 @@
 ---
-import tommy from "../assets/images/tommy.png";
-import heri from "../assets/images/heri.png";
-import sahriza from "../assets/images/sahriza.png";
-import tulus from "../assets/images/tulus.png";
-import sonia from "../assets/images/sonia.png";
-import anggoro from "../assets/images/anggoro.png";
-import faqih from "../assets/images/faqih.png";
-import yehezkiel from "../assets/images/yehezkiel.png";
-
 import ChartLg from "./ChartLg.astro";
+import ChartSm from "./ChartSm.astro";
 ---
 
 <section class="py-8 md:pb-12 md:pt-6 bg-white">
-  <div class="max-w-6xl mx-auto px-6 text-center reveal-group">
+  <div class="max-w-6xl mx-auto px-0 lg:px-6 text-center reveal-group">
     <h2
       class="text-3xl md:text-4xl font-bold text-[#0F172A] mb-6 reveal reveal-up"
     >
@@ -26,7 +18,12 @@ import ChartLg from "./ChartLg.astro";
       operational reliability, supply consistency, and long-term industry
       partnerships.
     </p>
-    <ChartLg />
+    <div class="block md:hidden reveal reveal-zoom">
+      <ChartSm />
+    </div>
+    <div class="large-chart reveal reveal-zoom">
+      <ChartLg />
+    </div>
   </div>
 </section>
 
@@ -47,6 +44,12 @@ import ChartLg from "./ChartLg.astro";
 
 <style>
   /* overlay */
+
+  @media (max-width: 765px) {
+    .large-chart {
+      display: none;
+    }
+  }
 
   .org-preview {
     position: fixed;
@@ -73,21 +76,14 @@ import ChartLg from "./ChartLg.astro";
   .org-preview-card {
     width: 360px;
     max-width: 92vw;
-
     background: white;
-
     border-radius: 16px;
-
     padding: 0 0 16px 0;
-
     text-align: center;
-
     box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12),
       0 4px 10px rgba(15, 23, 42, 0.08);
-
     transform: translateY(18px) scale(0.97);
     opacity: 0;
-
     transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
       opacity 0.25s ease;
   }
@@ -174,6 +170,7 @@ import ChartLg from "./ChartLg.astro";
   const img = document.getElementById("org-preview-img");
   const name = document.getElementById("org-preview-name");
   const role = document.getElementById("org-preview-role");
+  const body = document.body;
 
   function showPreview(el) {
     const photo = el.dataset.photo;
@@ -188,6 +185,7 @@ import ChartLg from "./ChartLg.astro";
       img.src = photo;
       name.textContent = personName;
       role.textContent = personRole;
+      body.classList.add("freze");
 
       preview.classList.remove("hidden");
 
@@ -199,6 +197,7 @@ import ChartLg from "./ChartLg.astro";
 
   function hidePreview() {
     preview.classList.remove("show");
+    body.classList.remove("freze");
 
     setTimeout(() => {
       preview.classList.add("hidden");
