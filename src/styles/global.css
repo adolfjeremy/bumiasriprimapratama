@@ -8,6 +8,7 @@ body {
 
 section {
   scroll-margin-top: 120px;
+  overflow-x: clip;
 }
 
 .nav_link {
@@ -23,23 +24,28 @@ section {
 /* base reveal */
 
 .reveal {
+
   --reveal-x: 0px;
   --reveal-y: 40px;
-  --reveal-scale: 0.98;
+  --reveal-scale: .96;
   --reveal-delay: 0s;
 
   opacity: 0;
 
-  transform: translate3d(var(--reveal-x), var(--reveal-y), 0)
-    scale(var(--reveal-scale));
+  transform:
+    translate3d(var(--reveal-x), var(--reveal-y), 0) scale(var(--reveal-scale));
 
   transition:
-    opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
-    transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+    opacity .85s cubic-bezier(.22, .61, .36, 1),
+    transform .85s cubic-bezier(.22, .61, .36, 1);
 
   transition-delay: var(--reveal-delay);
 
   will-change: transform, opacity;
+
+  backface-visibility: hidden;
+  perspective: 1000px;
+
 }
 
 .reveal.is-visible {
@@ -47,31 +53,22 @@ section {
   transform: translate3d(0, 0, 0) scale(1);
 }
 
-/* directions */
-
 .reveal-left {
-  --reveal-x: -60px;
-  --reveal-y: 0px;
+  --reveal-x: -48px;
+  --reveal-y: 0;
 }
 
 .reveal-right {
-  --reveal-x: 60px;
-  --reveal-y: 0px;
+  --reveal-x: 48px;
+  --reveal-y: 0;
 }
 
 .reveal-up {
-  --reveal-y: 60px;
+  --reveal-y: 56px;
 }
 
 .reveal-zoom {
-  --reveal-scale: 0.9;
-}
-
-/* smooth rendering */
-
-.reveal {
-  backface-visibility: hidden;
-  perspective: 1000px;
+  --reveal-scale: .9;
 }
 
 /* accessibility */
