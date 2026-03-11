@@ -166,10 +166,14 @@ import ChartSm from "./ChartSm.astro";
 <script>
   const people = document.querySelectorAll(".person");
 
-  const preview = document.getElementById("org-preview");
-  const img = document.getElementById("org-preview-img");
-  const name = document.getElementById("org-preview-name");
-  const role = document.getElementById("org-preview-role");
+  const preview = document.getElementById("org-preview") as HTMLDivElement;
+  const img = document.getElementById("org-preview-img") as HTMLImageElement;
+  const name = document.getElementById(
+    "org-preview-name"
+  ) as HTMLHeadingElement;
+  const role = document.getElementById(
+    "org-preview-role"
+  ) as HTMLParagraphElement;
   const body = document.body;
 
   function showPreview(el) {
