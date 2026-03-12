@@ -1,5 +1,5 @@
 ---
-import logo from "../assets/images/logo.png";
+import logo from "../assets/images/logo.webp";
 import Button from "./Button.astro";
 const pathname = Astro.url.pathname;
 const links = [
@@ -27,7 +27,9 @@ const isActive = (href: string) =>
         links.map((item) => (
           <a
             href={item.href}
-            class={`nav-link hover:text-[#0077cc] ${isActive(item.href) ? "active" : ""}`}
+            class={`nav-link hover:text-[#0077cc] ${
+              isActive(item.href) ? "active" : ""
+            }`}
           >
             {item.name}
           </a>
@@ -62,11 +64,7 @@ const isActive = (href: string) =>
 
     <div
       id="drawerPanel"
-      class="absolute left-0 top-0 h-full w-72 bg-[#F3EFFE]
-         p-6 flex flex-col items-center justify-center gap-6
-         transform -translate-x-full
-         transition-[transform,opacity] duration-300 ease-out
-         opacity-0"
+      class="absolute left-0 top-0 h-full w-72 bg-[#F3EFFE] p-6 flex flex-col items-center justify-center gap-6 transform -translate-x-full transition-[transform,opacity] duration-300 ease-out opacity-0"
     >
       <!-- NAV -->
       <nav
@@ -76,7 +74,9 @@ const isActive = (href: string) =>
           links.map((item) => (
             <a
               href={item.href}
-              class={`nav-link hover:text-[#0077cc] ${isActive(item.href) ? "active" : ""}`}
+              class={`nav-link hover:text-[#0077cc] ${
+                isActive(item.href) ? "active" : ""
+              }`}
             >
               {item.name}
             </a>
@@ -96,9 +96,7 @@ const isActive = (href: string) =>
     width: 100%;
     background: #018ff5;
     border-radius: 3px;
-    transition:
-      transform 0.3s ease,
-      opacity 0.2s ease;
+    transition: transform 0.3s ease, opacity 0.2s ease;
   }
 
   #menuBtn.is-open .line:nth-child(1) {

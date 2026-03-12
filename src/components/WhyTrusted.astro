@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import imageBg from "../assets/images/trusted_bg.png";
+import imageBg from "../assets/images/trusted_bg.webp";
 ---
 
 <section class="relative py-16 md:py-20 text-white overflow-hidden">
@@ -11,8 +11,7 @@ import imageBg from "../assets/images/trusted_bg.png";
     class="absolute inset-0 w-full h-full object-cover"
     quality={90}
     format="webp"
-    loading="eager"
-    fetchpriority="high"
+    loading="lazy"
   />
   <div
     class="absolute inset-0 bg-gradient-to-t from-[#081c33]/95 via-[#0c2b4a]/70 to-transparent"

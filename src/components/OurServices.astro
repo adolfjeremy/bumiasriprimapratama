@@ -1,10 +1,10 @@
 ---
 import { Image } from "astro:assets";
-import serviceBg from "../assets/images/service_bg.png"
-import hsd from "../assets/images/hsd.png"
-import sts from "../assets/images/sts.png"
-import mfo from "../assets/images/mfo.png"
-import fsu from "../assets/images/fsu.png"
+import serviceBg from "../assets/images/service_bg.webp"
+import hsd from "../assets/images/hsd.webp"
+import sts from "../assets/images/sts.webp"
+import mfo from "../assets/images/mfo.webp"
+import fsu from "../assets/images/fsu.webp"
 const services = [
   {
     image: hsd.src,
@@ -42,8 +42,7 @@ const services = [
     class="absolute inset-0 w-full h-full object-cover"
     quality={60}
     format="webp"
-    loading="eager"
-    fetchpriority="high"
+    loading="lazy"
   />
     <div class="absolute inset-0 bg-black/40"></div>
 

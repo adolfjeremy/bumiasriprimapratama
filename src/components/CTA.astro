@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import ctaBg from "../assets/images/cta_bg.png";
+import ctaBg from "../assets/images/cta_bg.webp";
 import Button from "./Button.astro";
 ---
 
@@ -14,8 +14,7 @@ import Button from "./Button.astro";
     class="absolute inset-0 w-full h-full object-cover"
     quality={100}
     format="webp"
-    loading="eager"
-    fetchpriority="high"
+    loading="lazy"
   />
 
   <div
