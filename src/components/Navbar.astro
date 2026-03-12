@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import logo from "../assets/images/logo.webp";
 import Button from "./Button.astro";
 const pathname = Astro.url.pathname;
@@ -18,7 +19,14 @@ const isActive = (href: string) =>
   <div class="mx-auto py-4 flex items-center justify-between">
     <!-- LOGO -->
     <div class="flex items-center gap-2">
-      <img src={logo.src} alt="BAPP" class="w-26 md:w-36 h-auto" />
+      <Image
+        src={logo}
+        alt="BAPP"
+        class="w-26 md:w-36 h-auto"
+        fetchpriority="high"
+        quality={90}
+        format="webp"
+      />
     </div>
 
     <!-- DESKTOP NAV -->
