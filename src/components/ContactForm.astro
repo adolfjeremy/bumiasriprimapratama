@@ -70,14 +70,19 @@
           Fuel & Marine Service Inquiry
         </h3>
 
-        <form class="space-y-5 reveal reveal-right">
+        <form id="contactForm" class="space-y-5 reveal reveal-right">
+          <!-- Honeypot -->
+          <input type="text" name="website" class="hidden" />
+
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-2">
               Full Name
             </label>
             <input
               type="text"
-              class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600"
+              name="name"
+              required
+              class="w-full border border-gray-300 rounded-lg px-4 py-3"
             />
           </div>
 
@@ -87,7 +92,8 @@
             </label>
             <input
               type="text"
-              class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600"
+              name="company"
+              class="w-full border border-gray-300 rounded-lg px-4 py-3"
             />
           </div>
 
@@ -98,16 +104,20 @@
               </label>
               <input
                 type="email"
-                class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600"
+                name="email"
+                required
+                class="w-full border border-gray-300 rounded-lg px-4 py-3"
               />
             </div>
+
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-2">
                 Phone Number
               </label>
               <input
                 type="tel"
-                class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600"
+                name="phone"
+                class="w-full border border-gray-300 rounded-lg px-4 py-3"
               />
             </div>
           </div>
@@ -117,7 +127,8 @@
               Type of Service
             </label>
             <select
-              class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600"
+              name="service"
+              class="w-full border border-gray-300 rounded-lg px-4 py-3"
             >
               <option>High Speed Diesel (HSD) Trading</option>
               <option>Marine Fuel Oil (MFO)</option>
@@ -125,24 +136,114 @@
               <option>Floating Storage Unit (FSU)</option>
             </select>
           </div>
+
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-2">
               Message
             </label>
             <textarea
+              name="message"
               rows="4"
-              class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600"
+              required
+              class="w-full border border-gray-300 rounded-lg px-4 py-3"
             ></textarea>
           </div>
 
           <button
+            id="submitBtn"
             type="submit"
-            class="w-full bg-[#0077cc] hover:bg-[#0178d4] cursor-pointer text-white font-semibold py-3 rounded-lg transition"
+            class="w-full bg-[#0077cc] hover:bg-[#0178d4] cursor-pointer text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
           >
-            Request Quotation
+            <span id="btnText">Request Quotation</span>
+
+            <svg
+              id="btnLoader"
+              class="hidden animate-spin h-5 w-5"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="white"
+                stroke-width="4"></circle>
+              <path class="opacity-75" fill="white" d="M4 12a8 8 0 018-8v8z">
+              </path>
+            </svg>
           </button>
         </form>
+        <div
+          id="formSuccess"
+          class="hidden mt-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-700"
+        >
+          Thank you. Your inquiry has been successfully sent. Our team will
+          contact you shortly.
+        </div>
+
+        <div
+          id="formError"
+          class="hidden mt-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700"
+        >
+          Something went wrong. Please try again later.
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  const form = document.getElementById("contactForm") as HTMLFormElement | null;
+  const button = document.getElementById(
+    "submitBtn"
+  ) as HTMLButtonElement | null;
+  const btnText = document.getElementById("btnText");
+  const loader = document.getElementById("btnLoader");
+
+  const successBox = document.getElementById("formSuccess");
+  const errorBox = document.getElementById("formError");
+
+  if (form && button && btnText && loader && successBox && errorBox) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      successBox.classList.add("hidden");
+      errorBox.classList.add("hidden");
+
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      button.disabled = true;
+      loader.classList.remove("hidden");
+      btnText.textContent = "Sending...";
+
+      try {
+        const res = await fetch("/api/contact", {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          body: JSON.stringify(data),
+        });
+
+        if (res.ok) {
+          form.reset();
+          successBox.classList.remove("hidden");
+          successBox.scrollIntoView({ behavior: "smooth" });
+        } else {
+          errorBox.classList.remove("hidden");
+        }
+      } catch (err) {
+        errorBox.classList.remove("hidden");
+      }
+
+      loader.classList.add("hidden");
+      btnText.textContent = "Request Quotation";
+      button.disabled = false;
+    });
+  }
+</script>
