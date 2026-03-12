@@ -7,25 +7,25 @@ import mfoService from "../assets/images/mfo-service.webp"
 import fsuService from "../assets/images/fsu-service.webp"
 const services = [
   {
-    image: hsdService.src,
+    image: hsdService,
     title: "High Speed Diesel (HSD) Trading",
     desc: "Reliable HSD supply supporting industrial, mining, transportation, and marine operations across Indonesia.",
     alt:"High Speed Diesel distribution truck Indonesia"
   },
   {
-    image: mfoService.src,
+    image: mfoService,
     title: "Marine Fuel Oil (MFO) Supply",
     desc: "Provision of Biosolar B40, LSFO 180/380, and HSFO 180/380 for domestic and international shipping operations.",
     alt:"Marine Fuel Oil storage and delivery in Indonesia"
   },
   {
-    image: stsService.src,
+    image: stsService,
     title: "Bunker Services & Ship-to-Ship (STS)",
     desc: "Professional bunker and ship-to-ship transfer services ensuring safe, compliant, and efficient offshore fuel delivery.",
     alt:"Bunker and Ship-to-Ship transfer services in Indonesia"
   },
   {
-    image: fsuService.src,
+    image: fsuService,
     title: "Floating Storage Unit (FSU)",
     desc: "Strategic floating storage infrastructure in NTT enabling responsive marine fuel distribution in high-demand routes.",
     alt:"Floating Storage Unit for marine fuel distribution in Indonesia"
@@ -59,10 +59,13 @@ const services = [
       {services.map((service) => (
         <a href="/services" class="group relative overflow-hidden rounded-xl reveal reveal-up">
 
-          <img
+          <Image
             src={service.image}
-            alt={service.alt}
+            alt={service.alt} 
             class="w-full h-[420px] object-cover transition-transform duration-700 group-hover:scale-110"
+            loading="lazy"
+            quality={60}
+            format="webp"
           />
 
           <!-- Overlay -->
