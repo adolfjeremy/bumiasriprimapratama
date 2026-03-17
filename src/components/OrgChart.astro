@@ -29,151 +29,185 @@ import ChartSm from "./ChartSm.astro";
 
 <!-- Preview Modal -->
 
-<div id="org-preview" class="org-preview hidden">
-  <div id="org-preview-card" class="org-preview-card">
-    <div>
-      <img id="org-preview-img" />
-    </div>
+<div id="org-preview" class="org-preview flex flex-row hidden">
 
+  <div class="org-preview-card">
+    <div>
+      <img class="org-preview-img" />
+    </div>
     <div class="preview-info">
-      <h3 id="org-preview-name"></h3>
-      <p id="org-preview-role"></p>
+      <h3 class="org-preview-name"></h3>
+      <p class="org-preview-role"></p>
     </div>
   </div>
+
+  <div class="org-preview-card">
+    <div>
+      <img class="org-preview-img" />
+    </div>
+    <div class="preview-info">
+      <h3 class="org-preview-name"></h3>
+      <p class="org-preview-role"></p>
+    </div>
+  </div>
+
 </div>
 
-<style>
-  /* overlay */
 
-  @media (max-width: 765px) {
-    .large-chart {
-      display: none;
-    }
+
+<style>
+/* overlay */
+
+@media (max-width: 765px) {
+  .large-chart {
+    display: none;
   }
+}
+
+.org-preview {
+  position: fixed;
+  inset: 0;
+  height: 100vh;  
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(15, 23, 42, 0.55);
+  z-index: 9999;
+
+  opacity: 1;
+  transition: opacity 0.25s ease;
+
+  /* ⬇️ TAMBAHAN */
+  gap: 20px;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* card */
+
+.org-preview-card {
+  width: 360px;
+  max-width: 92vw;
+  background: white;
+  border-radius: 16px;
+  padding: 0 0 16px 0;
+  text-align: center;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12),
+    0 4px 10px rgba(15, 23, 42, 0.08);
+
+  transform: translateY(18px) scale(0.97);
+  opacity: 0;
+
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.25s ease;
+}
+
+.org-preview.show .org-preview-card {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* photo */
+
+.org-preview-card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+
+  border-radius: 12px;
+  margin-bottom: 18px;
+
+  border: 3px solid #f1f5f9;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* name */
+
+.org-preview-card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+
+  margin-bottom: 6px;
+  line-height: 1.25;
+  letter-spacing: 0.2px;
+}
+
+/* role */
+
+.org-preview-card p {
+  font-size: 15px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* ========================= */
+/* 📱 MOBILE (STACK) */
+/* ========================= */
+
+@media (max-width: 768px) {
 
   .org-preview {
-    position: fixed;
-    inset: 0;
-    display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-
-    background: rgba(15, 23, 42, 0.55);
-
-    z-index: 9999;
-
-    opacity: 1;
-    transition: opacity 0.25s ease;
+    gap: 16px;
   }
-
-  .hidden {
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  /* card */
 
   .org-preview-card {
-    width: 360px;
-    max-width: 92vw;
-    background: white;
-    border-radius: 16px;
-    padding: 0 0 16px 0;
-    text-align: center;
-    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12),
-      0 4px 10px rgba(15, 23, 42, 0.08);
-    transform: translateY(18px) scale(0.97);
-    opacity: 0;
-    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-      opacity 0.25s ease;
+    width: 100%;
+    max-width: 320px; /* ⬅️ penting */
+    padding: 20px;
+    max-height: 50svh;
   }
-
-  .org-preview.show .org-preview-card {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-
-  /* photo */
 
   .org-preview-card img {
     width: 100%;
     height: auto;
-
-    object-fit: cover;
-
-    border-radius: 12px;
-
-    margin-bottom: 18px;
-
-    border: 3px solid #f1f5f9;
-
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    max-height: 32svh;   /* ⬅️ ini bikin image tidak kebesaran */
+  object-fit: cover;
   }
-
-  /* name */
 
   .org-preview-card h3 {
+    font-size: 20px;
+  }
+
+  .name {
     font-size: 22px;
     font-weight: 700;
-
-    color: #0f172a;
-
-    margin-bottom: 6px;
-
-    line-height: 1.25;
-
-    letter-spacing: 0.2px;
   }
 
-  /* role */
+  .role {
+    font-size: 17px;
+  }
+}
 
-  .org-preview-card p {
-    font-size: 15px;
+/* ========================= */
+/* 💻 DESKTOP (2 COLUMN) */
+/* ========================= */
 
-    color: #64748b;
+@media (min-width: 769px) {
 
-    font-weight: 500;
+  .org-preview {
+    flex-direction: row; /* ⬅️ side by side */
   }
 
-  /* mobile */
-
-  @media (max-width: 768px) {
-    .org-preview-card {
-      width: 92vw;
-
-      padding: 24px;
-    }
-
-    .org-preview-card img {
-      width: 100%;
-      height: auto;
-    }
-
-    .org-preview-card h3 {
-      font-size: 20px;
-    }
-    .name {
-      font-size: 22px;
-      font-weight: 700;
-    }
-
-    .role {
-      font-size: 17px;
-    }
-  }
+}
 </style>
 
 <script>
   const people = document.querySelectorAll(".person");
 
-  const preview = document.getElementById("org-preview") as HTMLDivElement;
-  const img = document.getElementById("org-preview-img") as HTMLImageElement;
-  const name = document.getElementById(
-    "org-preview-name"
-  ) as HTMLHeadingElement;
-  const role = document.getElementById(
-    "org-preview-role"
-  ) as HTMLParagraphElement;
+  const preview = document.getElementById("org-preview");
+  const cards = document.querySelectorAll(".org-preview-card");
+
   const body = document.body;
 
   function showPreview(el) {
@@ -181,22 +215,54 @@ import ChartSm from "./ChartSm.astro";
     const personName = el.dataset.name;
     const personRole = el.dataset.role;
 
-    const preload = new Image();
+    const img = cards[0].querySelector(".org-preview-img");
+    const name = cards[0].querySelector(".org-preview-name");
+    const role = cards[0].querySelector(".org-preview-role");
 
+    const preload = new Image();
     preload.src = photo;
 
     preload.onload = () => {
       img.src = photo;
       name.textContent = personName;
       role.textContent = personRole;
-      body.classList.add("freze");
 
-      preview.classList.remove("hidden");
+      // hide card ke-2
+      cards[1].classList.add("hidden");
 
-      requestAnimationFrame(() => {
-        preview.classList.add("show");
-      });
+      showContainer();
     };
+  }
+
+  function showPreviewMultiple(el) {
+    const names = el.dataset.names.split("|");
+    const roles = el.dataset.roles.split("|");
+    const photos = el.dataset.photos.split("|");
+
+    names.forEach((n, i) => {
+      const card = cards[i];
+
+      const img = card.querySelector(".org-preview-img");
+      const name = card.querySelector(".org-preview-name");
+      const role = card.querySelector(".org-preview-role");
+
+      img.src = photos[i];
+      name.textContent = n;
+      role.textContent = roles[i];
+
+      card.classList.remove("hidden");
+    });
+
+    showContainer();
+  }
+
+  function showContainer() {
+    body.classList.add("freze");
+    preview.classList.remove("hidden");
+
+    requestAnimationFrame(() => {
+      preview.classList.add("show");
+    });
   }
 
   function hidePreview() {
@@ -206,10 +272,14 @@ import ChartSm from "./ChartSm.astro";
     setTimeout(() => {
       preview.classList.add("hidden");
 
-      // reset content supaya tidak flicker
-      img.src = "";
-      name.textContent = "";
-      role.textContent = "";
+      // reset semua card
+      cards.forEach((card) => {
+        card.classList.remove("hidden");
+
+        card.querySelector(".org-preview-img").src = "";
+        card.querySelector(".org-preview-name").textContent = "";
+        card.querySelector(".org-preview-role").textContent = "";
+      });
     }, 200);
   }
 
@@ -217,7 +287,11 @@ import ChartSm from "./ChartSm.astro";
     el.addEventListener("click", (e) => {
       e.stopPropagation();
 
-      showPreview(el);
+      if (el.dataset.type === "multiple") {
+        showPreviewMultiple(el);
+      } else {
+        showPreview(el);
+      }
     });
   });
 
@@ -227,10 +301,18 @@ import ChartSm from "./ChartSm.astro";
     }
   });
 
-  const photos = document.querySelectorAll(".person");
+  // preload
+  people.forEach((el) => {
+    if (el.dataset.photo) {
+      const img = new Image();
+      img.src = el.dataset.photo;
+    }
 
-  photos.forEach((el) => {
-    const img = new Image();
-    img.src = el.dataset.photo;
+    if (el.dataset.photos) {
+      el.dataset.photos.split("|").forEach((src) => {
+        const img = new Image();
+        img.src = src;
+      });
+    }
   });
 </script>

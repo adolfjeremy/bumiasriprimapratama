@@ -74,56 +74,33 @@ import yehezkiel from "../assets/images/yehezkiel.png";
         <text class="name" x="375" y="40">H. Hutomo Mandala Putra, SH</text>
         <text class="role" x="375" y="65">Owner</text>
 
-        <line class="line" x1="375" y1="90" x2="375" y2="140"></line>
+        <!-- INTERNAL AUDITOR -->
 
-        <!-- PRESIDENT COMMISSIONER -->
+        <line class="line" x1="375" y1="190" x2="255" y2="190"></line>
 
+        <rect class="box" x="155" y="140" width="200" height="100" rx="20"
+        ></rect>
+
+        <text class="name" x="255" y="195">Internal Auditor</text>
+
+        <line class="line" x1="375" y1="90" x2="375" y2="300"></line>
+
+        <!-- Commissioner -->
+
+        <line class="line" x1="350" y1="190" x2="400" y2="190"></line>
         <rect
             class="box person"
-            data-name="Hery Mutohar"
-            data-role="President Commissioner"
-            data-photo={heri.src}
-            x="245"
+            data-type="multiple"
+            data-names="Hery Mutohar|Sah Riza Novantiar"
+            data-roles="President Commissioner|Commissioner"
+            data-photos={`${heri.src}|${sahriza.src}`}
+            x="390"
             y="140"
             width="260"
             height="100"
             rx="20"></rect>
 
-        <text class="name" x="375" y="185">Hery Mutohar</text>
-        <text class="role" x="375" y="210">President Commissioner</text>
-
-        <line class="line" x1="375" y1="240" x2="375" y2="300"></line>
-
-        <!-- COMMISSIONER -->
-
-        <rect
-            class="box person"
-            data-name="Sah Riza Novantiar"
-            data-role="Commissioner"
-            data-photo={sahriza.src}
-            x="245"
-            y="300"
-            width="260"
-            height="100"
-            rx="20"></rect>
-
-        <text class="name" x="375" y="345">Sah Riza Novantiar</text>
-        <text class="role" x="375" y="370">Commissioner</text>
-
-        <line class="line" x1="375" y1="400" x2="375" y2="460"></line>
-
-        <!-- INTERNAL AUDITOR -->
-
-        <!-- INTERNAL AUDITOR -->
-
-        <line class="line" x1="375" y1="460" x2="255" y2="460"></line>
-
-        <rect class="box" x="155" y="410" width="200" height="100" rx="20"
-        ></rect>
-
-        <text class="name" x="255" y="460">Internal Auditor</text>
-
-        <line class="line" x1="375" y1="460" x2="375" y2="520"></line>
+        <text class="name" x="520" y="195">Commissioner</text>
 
         <!-- PRESIDENT DIRECTOR -->
 
@@ -133,22 +110,22 @@ import yehezkiel from "../assets/images/yehezkiel.png";
             data-role="President Director"
             data-photo={tulus.src}
             x="245"
-            y="520"
+            y="300"
             width="260"
             height="100"
             rx="20"></rect>
 
-        <text class="name" x="375" y="565">Tulus Widaryanto</text>
-        <text class="role" x="375" y="590">President Director</text>
+        <text class="name" x="375" y="345">Tulus Widaryanto</text>
+        <text class="role" x="375" y="370">President Director</text>
 
-        <line class="line" x1="375" y1="620" x2="375" y2="680"></line>
+        <line class="line" x1="375" y1="400" x2="375" y2="460"></line>
 
         <!-- SPLIT -->
 
-        <line class="line" x1="260" y1="680" x2="490" y2="680"></line>
+        <line class="line" x1="260" y1="460" x2="490" y2="460"></line>
 
-        <line class="line" x1="260" y1="680" x2="260" y2="730"></line>
-        <line class="line" x1="490" y1="680" x2="490" y2="730"></line>
+        <line class="line" x1="260" y1="460" x2="260" y2="510"></line>
+        <line class="line" x1="490" y1="460" x2="490" y2="510"></line>
 
         <!-- OPERATION DIRECTOR -->
 
@@ -158,13 +135,13 @@ import yehezkiel from "../assets/images/yehezkiel.png";
             data-role="Operation Director"
             data-photo={sonia.src}
             x="105"
-            y="730"
+            y="510"
             width="260"
             height="100"
             rx="20"></rect>
 
-        <text class="name" x="235" y="775">Sonia Balqis Anshori</text>
-        <text class="role" x="235" y="800">Operation Director</text>
+        <text class="name" x="235" y="555">Sonia Balqis Anshori</text>
+        <text class="role" x="235" y="580">Operation Director</text>
 
         <!-- TECHNICAL DIRECTOR -->
 
@@ -174,17 +151,17 @@ import yehezkiel from "../assets/images/yehezkiel.png";
             data-role="Technical & Commercial Director"
             data-photo={anggoro.src}
             x="385"
-            y="730"
+            y="510"
             width="260"
             height="100"
             rx="20"></rect>
 
-        <text class="name" x="515" y="775">Anggoro Ibnu Baskoro</text>
-        <text class="role" x="515" y="800">Technical & Commercial Director</text
+        <text class="name" x="515" y="555">Anggoro Ibnu Baskoro</text>
+        <text class="role" x="515" y="580">Technical & Commercial Director</text
         >
 
-        <line class="line" x1="260" y1="830" x2="260" y2="880"></line>
-        <line class="line" x1="490" y1="830" x2="490" y2="880"></line>
+        <line class="line" x1="260" y1="610" x2="260" y2="660"></line>
+        <line class="line" x1="490" y1="610" x2="490" y2="660"></line>
 
         <!-- GM FINANCE -->
 
@@ -194,13 +171,13 @@ import yehezkiel from "../assets/images/yehezkiel.png";
             data-role="GM Finance"
             data-photo={faqih.src}
             x="105"
-            y="880"
+            y="660"
             width="260"
             height="100"
             rx="20"></rect>
 
-        <text class="name" x="235" y="925">Faqih Fauzi</text>
-        <text class="role" x="235" y="950">GM Finance</text>
+        <text class="name" x="235" y="705">Faqih Fauzi</text>
+        <text class="role" x="235" y="730">GM Finance</text>
 
         <!-- GM SUPPLY CHAIN -->
 
@@ -210,13 +187,13 @@ import yehezkiel from "../assets/images/yehezkiel.png";
             data-role="GM Supply Chain"
             data-photo={yehezkiel.src}
             x="385"
-            y="880"
+            y="660"
             width="260"
             height="100"
             rx="20"></rect>
 
-        <text class="name" x="515" y="925">Yehezikel Yonathan</text>
-        <text class="role" x="515" y="950">GM Supply Chain</text>
+        <text class="name" x="515" y="705">Yehezikel Yonathan</text>
+        <text class="role" x="515" y="730">GM Supply Chain</text>
     </svg>
 </div>
 
