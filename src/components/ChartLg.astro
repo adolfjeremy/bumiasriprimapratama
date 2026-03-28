@@ -1,12 +1,12 @@
 ---
-import tommy from "../assets/images/tommy.png";
-import heri from "../assets/images/heri.png";
-import sahriza from "../assets/images/sahriza.png";
-import tulus from "../assets/images/tulus.png";
-import sonia from "../assets/images/sonia.png";
-import anggoro from "../assets/images/anggoro.png";
-import faqih from "../assets/images/faqih.png";
-import yehezkiel from "../assets/images/yehezkiel.png";
+import tommy from "../assets/images/teams/tommy.webp";
+import heri from "../assets/images/teams/heri.webp";
+import sahriza from "../assets/images/teams/sahriza.webp";
+import tulus from "../assets/images/teams/tulus.webp";
+import sonia from "../assets/images/teams/sonia.webp";
+import anggoro from "../assets/images/teams/anggoro.webp";
+import faqih from "../assets/images/teams/faqih.webp";
+import yehezkiel from "../assets/images/teams/yehezkiel.webp";
 ---
 
 <div class="chart-wrapper w-full max-w-5xl mx-auto">
@@ -20,7 +20,9 @@ import yehezkiel from "../assets/images/yehezkiel.png";
 
                 .box {
                     fill: #0f2e4d;
-                    transition: transform 0.25s ease, filter 0.25s ease;
+                    transition:
+                        transform 0.25s ease,
+                        filter 0.25s ease;
                     transform-box: fill-box;
                     transform-origin: center;
                     cursor: pointer;
@@ -88,19 +90,18 @@ import yehezkiel from "../assets/images/yehezkiel.png";
 
         <!-- Commisioner -->
         <rect
-        class="box person"
-        data-type="multiple"
-        data-names="Hery Mutohar|Sah Riza Novantiar"
-        data-roles="President Commissioner|Commissioner"
-        data-photos={`${heri.src}|${sahriza.src}`}
-        x="700"
-        y="90"
-        width="300"
-        height="100"
-        rx="20"></rect>
+            class="box person"
+            data-type="multiple"
+            data-names="Hery Mutohar|Sah Riza Novantiar"
+            data-roles="President Commissioner|Commissioner"
+            data-photos={`${heri.src}|${sahriza.src}`}
+            x="700"
+            y="90"
+            width="300"
+            height="100"
+            rx="20"></rect>
 
-        <text class="name" x="850" y="145">Commissioner</text
-        >
+        <text class="name" x="850" y="145">Commissioner</text>
 
         <line class="line" x1="500" y1="140" x2="700" y2="140"></line>
         <!-- <line class="line" x1="800" y1="830" x2="800" y2="880"></line> -->

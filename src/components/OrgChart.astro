@@ -29,22 +29,33 @@ import ChartSm from "./ChartSm.astro";
 
 <!-- Preview Modal -->
 
-<div id="org-preview" class="org-preview flex flex-row hidden">
-  <div class="org-preview-card">
-    <div>
+<div
+  id="org-preview"
+  class="org-preview flex flex-col md:flex-row items-center justify-center p-6 gap-2 md:gap-10 hidden"
+>
+  <div
+    class="org-preview-card flex flex-col justify-center items-center basis-sm"
+  >
+    <div
+      class="w-[100%] h-[100%] p-2 pb-0 overflow-hidden flex justify-center items-center"
+    >
       <img class="org-preview-img" />
     </div>
-    <div class="preview-info">
+    <div class="preview-info p-1 md:py-4">
       <h3 class="org-preview-name"></h3>
       <p class="org-preview-role"></p>
     </div>
   </div>
 
-  <div class="org-preview-card">
-    <div>
+  <div
+    class="org-preview-card flex flex-col justify-center items-center basis-sm"
+  >
+    <div
+      class="w-[100%] h-[100%] p-2 pb-0 overflow-hidden flex justify-center items-center"
+    >
       <img class="org-preview-img" />
     </div>
-    <div class="preview-info">
+    <div class="preview-info p-1 md:py-4">
       <h3 class="org-preview-name"></h3>
       <p class="org-preview-role"></p>
     </div>
@@ -65,10 +76,6 @@ import ChartSm from "./ChartSm.astro";
     inset: 0;
     height: 100vh;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
     background: rgba(15, 23, 42, 0.55);
     z-index: 9999;
 
@@ -76,9 +83,6 @@ import ChartSm from "./ChartSm.astro";
     transition: opacity 0.25s ease;
 
     /* ⬇️ TAMBAHAN */
-    gap: 20px;
-    padding: 20px;
-    flex-wrap: wrap;
   }
 
   .hidden {
@@ -90,19 +94,27 @@ import ChartSm from "./ChartSm.astro";
 
   .org-preview-card {
     width: 360px;
-    max-width: 92vw;
+    /* max-width: 92vw; */
     background: white;
     border-radius: 16px;
-    padding: 0 0 16px 0;
     text-align: center;
-    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12),
+    box-shadow:
+      0 12px 32px rgba(15, 23, 42, 0.12),
       0 4px 10px rgba(15, 23, 42, 0.08);
 
     transform: translateY(18px) scale(0.97);
     opacity: 0;
 
-    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
       opacity 0.25s ease;
+  }
+
+  @media (max-width: 768px) {
+    .org-preview-card {
+      width: 100%;
+      height: 50%;
+    }
   }
 
   .org-preview.show .org-preview-card {
@@ -114,14 +126,10 @@ import ChartSm from "./ChartSm.astro";
 
   .org-preview-card img {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
-
+    object-position: top;
     border-radius: 12px;
-    margin-bottom: 18px;
-
-    border: 3px solid #f1f5f9;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
   }
 
   /* name */
@@ -130,8 +138,6 @@ import ChartSm from "./ChartSm.astro";
     font-size: 22px;
     font-weight: 700;
     color: #0f172a;
-
-    margin-bottom: 6px;
     line-height: 1.25;
     letter-spacing: 0.2px;
   }
@@ -144,72 +150,9 @@ import ChartSm from "./ChartSm.astro";
     font-weight: 500;
   }
 
-  /* ========================= */
-  /* 📱 MOBILE (STACK) */
-  /* ========================= */
-
   @media (max-width: 768px) {
-    .org-preview {
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-    }
-
-    .org-preview-card {
-      width: 100%;
-      max-width: 320px; /* ⬅️ penting */
-      padding: 20px;
-      max-height: 50svh;
-    }
-
-    .org-preview-card img {
-      width: 100%;
-      height: auto;
-      max-height: 32svh; /* ⬅️ ini bikin image tidak kebesaran */
-      object-fit: cover;
-    }
-
     .org-preview-card h3 {
-      font-size: 20px;
-    }
-  }
-
-  @media (max-width: 380px) {
-    .org-preview {
-      padding: 8px;
-    }
-    .org-preview-card {
-      width: 100%;
-      max-width: 320px; /* ⬅️ penting */
-      padding: 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .org-preview-card img {
-      width: 100%;
-      height: 100%;
-      margin-bottom: 0;
-    }
-    .org-preview-card h3 {
-      font-size: 16px;
-      font-weight: 700;
-    }
-
-    .org-preview-card p {
-      font-size: 12 px;
-    }
-  }
-
-  /* ========================= */
-  /* 💻 DESKTOP (2 COLUMN) */
-  /* ========================= */
-
-  @media (min-width: 769px) {
-    .org-preview {
-      flex-direction: row; /* ⬅️ side by side */
+      font-size: 18px;
     }
   }
 </style>
@@ -222,22 +165,26 @@ import ChartSm from "./ChartSm.astro";
 
   const body = document.body;
 
-  function showPreview(el) {
+  function showPreview(el: HTMLElement) {
+    if (!el.dataset.photo || !el.dataset.name || !el.dataset.role) return;
+
     const photo = el.dataset.photo;
     const personName = el.dataset.name;
     const personRole = el.dataset.role;
 
-    const img = cards[0].querySelector(".org-preview-img");
-    const name = cards[0].querySelector(".org-preview-name");
-    const role = cards[0].querySelector(".org-preview-role");
+    const img = cards[0].querySelector<HTMLImageElement>(".org-preview-img");
+    const name = cards[0].querySelector<HTMLElement>(".org-preview-name");
+    const role = cards[0].querySelector<HTMLElement>(".org-preview-role");
+
+    if (!img || !name || !role) return;
 
     const preload = new Image();
     preload.src = photo;
 
     preload.onload = () => {
       img.src = photo;
-      name.textContent = personName;
-      role.textContent = personRole;
+      name.textContent = personName ?? "";
+      role.textContent = personRole ?? "";
 
       // hide card ke-2
       cards[1].classList.add("hidden");
@@ -246,7 +193,9 @@ import ChartSm from "./ChartSm.astro";
     };
   }
 
-  function showPreviewMultiple(el) {
+  function showPreviewMultiple(el: HTMLElement) {
+    if (!el.dataset.names || !el.dataset.roles || !el.dataset.photos) return;
+
     const names = el.dataset.names.split("|");
     const roles = el.dataset.roles.split("|");
     const photos = el.dataset.photos.split("|");
@@ -254,9 +203,11 @@ import ChartSm from "./ChartSm.astro";
     names.forEach((n, i) => {
       const card = cards[i];
 
-      const img = card.querySelector(".org-preview-img");
-      const name = card.querySelector(".org-preview-name");
-      const role = card.querySelector(".org-preview-role");
+      const img = card.querySelector<HTMLImageElement>(".org-preview-img");
+      const name = card.querySelector<HTMLElement>(".org-preview-name");
+      const role = card.querySelector<HTMLElement>(".org-preview-role");
+
+      if (!img || !name || !role) return;
 
       img.src = photos[i];
       name.textContent = n;
@@ -270,27 +221,31 @@ import ChartSm from "./ChartSm.astro";
 
   function showContainer() {
     body.classList.add("freze");
-    preview.classList.remove("hidden");
+    preview?.classList.remove("hidden");
 
     requestAnimationFrame(() => {
-      preview.classList.add("show");
+      preview?.classList.add("show");
     });
   }
 
   function hidePreview() {
-    preview.classList.remove("show");
+    preview?.classList.remove("show");
     body.classList.remove("freze");
 
     setTimeout(() => {
-      preview.classList.add("hidden");
+      preview?.classList.add("hidden");
 
       // reset semua card
       cards.forEach((card) => {
         card.classList.remove("hidden");
 
-        card.querySelector(".org-preview-img").src = "";
-        card.querySelector(".org-preview-name").textContent = "";
-        card.querySelector(".org-preview-role").textContent = "";
+        const img = card.querySelector<HTMLImageElement>(".org-preview-img");
+        const name = card.querySelector<HTMLElement>(".org-preview-name");
+        const role = card.querySelector<HTMLElement>(".org-preview-role");
+
+        if (img) img.src = "";
+        if (name) name.textContent = "";
+        if (role) role.textContent = "";
       });
     }, 200);
   }
@@ -298,30 +253,32 @@ import ChartSm from "./ChartSm.astro";
   people.forEach((el) => {
     el.addEventListener("click", (e) => {
       e.stopPropagation();
+      const htmlEl = el as HTMLElement;
 
-      if (el.dataset.type === "multiple") {
-        showPreviewMultiple(el);
+      if (htmlEl.dataset.type === "multiple") {
+        showPreviewMultiple(htmlEl);
       } else {
-        showPreview(el);
+        showPreview(htmlEl);
       }
     });
   });
 
   document.addEventListener("click", (e) => {
-    if (!e.target.closest(".person")) {
+    if (!(e.target as HTMLElement)?.closest(".person")) {
       hidePreview();
     }
   });
 
   // preload
   people.forEach((el) => {
-    if (el.dataset.photo) {
+    const htmlEl = el as HTMLElement;
+    if (htmlEl.dataset.photo) {
       const img = new Image();
-      img.src = el.dataset.photo;
+      img.src = htmlEl.dataset.photo;
     }
 
-    if (el.dataset.photos) {
-      el.dataset.photos.split("|").forEach((src) => {
+    if (htmlEl.dataset.photos) {
+      htmlEl.dataset.photos.split("|").forEach((src) => {
         const img = new Image();
         img.src = src;
       });

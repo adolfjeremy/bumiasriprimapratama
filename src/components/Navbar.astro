@@ -47,7 +47,7 @@ const isActive = (href: string) =>
 
     <!-- CTA -->
     <div class="hidden lg:block">
-      <Button text="Company Profile" href="/compro-bapp.pdf" />
+      <Button text="Company Profile" href="/compro-bapp.pdf" target="_blank" />
     </div>
 
     <!-- MOBILE MENU BUTTON -->
@@ -104,7 +104,9 @@ const isActive = (href: string) =>
     width: 100%;
     background: #018ff5;
     border-radius: 3px;
-    transition: transform 0.3s ease, opacity 0.2s ease;
+    transition:
+      transform 0.3s ease,
+      opacity 0.2s ease;
   }
 
   #menuBtn.is-open .line:nth-child(1) {
