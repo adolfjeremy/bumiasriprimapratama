@@ -22,6 +22,7 @@ jobs:
       - run: npm ci
       - run: npm run build
 
+      # Setup SSH Native bawaan kamu (Sudah Sempurna)
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
@@ -30,7 +31,25 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
 
+      # MODIFIKASI: Ikut kirim package.json & amankan node_modules dari rsync --delete
       - name: Deploy
         run: |
-          rsync -avz --delete dist/ \
+          rsync -avz --delete --exclude='node_modules' \
+            dist/ package.json package-lock.json \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/static/bumiasriprimapratama.com/
+
+      # TAMBAHAN: Eksekusi npm install produksi & restart PM2 via SSH native
+      - name: Production Install & PM2 Restart
+        run: |
+          ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
+            cd /var/www/static/bumiasriprimapratama.com
+            
+            # Install hanya library runtime (termasuk piccolore), abaikan devDependencies
+            npm install --omit=dev --legacy-peer-deps
+            
+            # Restart Astro Server (mengarah ke server/entry.mjs sesuai struktur rsync kamu)
+            pm2 restart bapp-frontend || HOST=127.0.0.1 PORT=4321 pm2 start server/entry.mjs --name "bapp-frontend"
+            
+            # Simpan konfigurasi PM2
+            pm2 save
+          EOF
