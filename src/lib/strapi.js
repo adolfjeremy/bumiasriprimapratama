@@ -1,5 +1,5 @@
-const BASE_URL = import.meta.env.STRAPI_URL;
-const TOKEN = import.meta.env.STRAPI_API_TOKEN;
+const BASE_URL = process.env.STRAPI_URL || import.meta.env.STRAPI_URL;
+const TOKEN = process.env.STRAPI_API_TOKEN || import.meta.env.STRAPI_API_TOKEN;
 
 export async function fetchAPI(path) {
     const res = await fetch(`${BASE_URL}${path}`, {
