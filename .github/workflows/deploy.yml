@@ -31,26 +31,37 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
 
-      # MODIFIKASI: Ikut kirim package.json & amankan node_modules dari rsync --delete
+      # PERBAIKAN 1: Satukan file ke folder staging agar rsync tidak bingung & tidak menghapus .env
+      - name: Prepare Staging Folder
+        run: |
+          mkdir staging
+          cp -r dist/* staging/
+          cp package.json package-lock.json staging/
+
+      # PERBAIKAN 2: Deploy dari folder staging dengan filter eksklusi yang patuh
       - name: Deploy
         run: |
-          rsync -avz --delete --exclude='node_modules' \
-            --exclude='.env' \
-            dist/ package.json package-lock.json \
-            ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/static/bumiasriprimapratama.com/
+          rsync -avz --delete --exclude='node_modules' --exclude='.env' \
+            staging/ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/static/bumiasriprimapratama.com/
 
-      # TAMBAHAN: Eksekusi npm install produksi & restart PM2 via SSH native
+      # PERBAIKAN 3: Paksa PM2 hapus memori lama dan daftarkan ulang flag --env-file
       - name: Production Install & PM2 Restart
         run: |
           ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
             cd /var/www/static/bumiasriprimapratama.com
             
-            # Install hanya library runtime (termasuk piccolore), abaikan devDependencies
+            # Install library runtime produksi
             npm install --omit=dev --legacy-peer-deps
             
-            # Restart Astro Server (mengarah ke server/entry.mjs sesuai struktur rsync kamu)
-            pm2 restart bapp-frontend || HOST=127.0.0.1 PORT=4321 pm2 start server/entry.mjs --name "bapp-frontend" --node-args="--env-file=.env"
+            # Paksa bebaskan port jika ada proses yang menggantung
+            sudo fuser -k 4321/tcp || true
             
-            # Simpan konfigurasi PM2
+            # SOLUSI UTAMA: Hapus instansiasi lama dari memori PM2 terlebih dahulu
+            pm2 delete bapp-frontend || true
+            
+            # Daftarkan ulang secara segar agar flag --env-file aktif 100%
+            HOST=127.0.0.1 PORT=4321 pm2 start server/entry.mjs --name "bapp-frontend" --node-args="--env-file=.env"
+            
+            # Simpan konfigurasi PM2 yang baru
             pm2 save
           EOF
