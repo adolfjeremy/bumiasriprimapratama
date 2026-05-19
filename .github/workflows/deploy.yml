@@ -50,18 +50,21 @@ jobs:
           ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
             cd /var/www/static/bumiasriprimapratama.com
             
-            # Install library runtime produksi
+            # 1. Install library runtime produksi
             npm install --omit=dev --legacy-peer-deps
             
-            # Paksa bebaskan port jika ada proses yang menggantung
+            # 2. Paksa bebaskan port jika ada proses yang menggantung
             sudo fuser -k 4321/tcp || true
             
-            # SOLUSI UTAMA: Hapus instansiasi lama dari memori PM2 terlebih dahulu
+            # 3. Hapus instansiasi lama dari memori PM2
             pm2 delete bapp-frontend || true
             
-            # Daftarkan ulang secara segar agar flag --env-file aktif 100%
-            HOST=127.0.0.1 PORT=4321 pm2 start server/entry.mjs --name "bapp-frontend" --node-args="--env-file=.env"
+            # 4. TRICK UTAMA: Suruh Linux membaca file .env dan menjadikannya env variabel sementara
+            export $(grep -v '^#' .env | xargs)
             
-            # Simpan konfigurasi PM2 yang baru
+            # 5. Jalankan PM2 (PM2 otomatis mencuri & mengunci semua variabel yang di-export di atas)
+            HOST=127.0.0.1 PORT=4321 pm2 start server/entry.mjs --name "bapp-frontend"
+            
+            # 6. Simpan konfigurasi PM2 yang baru
             pm2 save
           EOF
