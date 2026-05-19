@@ -21,6 +21,9 @@ jobs:
 
       - run: npm ci
       - run: npm run build
+        env:
+          STRAPI_URL: ${{ secrets.STRAPI_URL }}
+          STRAPI_API_TOKEN: ${{ secrets.STRAPI_API_TOKEN }}
 
       # Setup SSH Native bawaan kamu (Sudah Sempurna)
       - name: Setup SSH
