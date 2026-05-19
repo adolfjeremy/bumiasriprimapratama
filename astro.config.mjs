@@ -13,7 +13,10 @@ export default defineConfig({
     mode: 'standalone',
   }),
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [/** @type {any} */ (tailwindcss())],
+    ssr: {
+      noExternal: true,
+    },
   },
 
   integrations: [sitemap()],
