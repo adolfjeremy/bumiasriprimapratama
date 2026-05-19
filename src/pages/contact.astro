@@ -3,6 +3,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import contactBg from "../assets/images/contact-us-bg.webp";
 import ContactForm from "../components/ContactForm.astro";
+
+export const prerender = true;
+
 const schema = [
   {
     "@context": "https://schema.org",

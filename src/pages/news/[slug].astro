@@ -1,0 +1,99 @@
+---
+import { fetchAPI, getStrapiMedia } from "../../lib/strapi";
+import { Image } from "astro:assets";
+import { datetime } from "../../lib/datetime";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ArticleItem from "../../components/ArticleItem.astro";
+
+const { slug } = Astro.params;
+
+const res = await fetchAPI(
+    `/api/articles?filters[slug][$eq]=${slug}&populate[featured_image]=true&populate[category]=true&populate[seo]=true`,
+);
+const articlesParams = new URLSearchParams({
+    sort: "publishedAt:desc",
+    fields: "title,slug,publishedAt",
+    "populate[thumbnail]": "true",
+    "populate[category]": "true",
+    "pagination[pageSize]": "6",
+    "filters[slug][$ne]": slug!,
+});
+const articlesRes = await fetchAPI(`/api/articles?${articlesParams}`);
+
+const news = res.data[0];
+const relatedArticles = articlesRes.data;
+
+if (!news) {
+    throw new Error("Article not found");
+}
+---
+
+<BaseLayout title={news.seo.meta_title} description={news.seo.meta_description}>
+    <article
+        class="flex flex-col gap-6 px-[16px] lg:px-0 lg:max-w-[720px] mx-auto pt-28 pb-8 lg:pt-50 lg:pb-20"
+    >
+        <div
+            class="flex flex-col gap-3 items-center justify-center lg:max-w-5xl mx-auto"
+        >
+            <span
+                class="text-sm font-medium uppercase tracking-wider text-[#018FF5] bg-sky-100 px-3 py-1 rounded-full p-6"
+                >{news.category.name}</span
+            >
+            <h1
+                class="text-center justify-center text-neutral-800 lg:text-4xl text-3xl font-semibold lg:leading-[52px] leading-[40px]"
+            >
+                {news.title}
+            </h1>
+            <p class="text-neutral-600">{datetime(news.publishedAt)}</p>
+        </div>
+        <Image
+            src={getStrapiMedia(news.featured_image.url)}
+            alt={news.featured_image.alternativeText}
+            class="rounded-xl"
+            quality={70}
+            format="webp"
+            loading="eager"
+            width="1240"
+            height="620"
+            fetchpriority="high"
+        />
+        <div
+            class="px-2 md:px-[20px] prose lg:prose-xl [&_ol]:list-decimal [&_ol]:ml-6 text-lg text-[#242424] article-content"
+            set:html={news.content}
+        />
+    </article>
+    <section
+        class="px-[16px] md:px-[64px] lg:px-[80px] pt-6 pb-12 md:pt-8 md:pb-16"
+    >
+        <div class="flex flex-col items-center justify-center mb-8">
+            <h2
+                class="text-center justify-center text-neutral-800 text-2xl font-semibold leading-10"
+            >
+                Related Articles
+            </h2>
+        </div>
+        <div>
+            {
+                relatedArticles.length > 0 ? (
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {relatedArticles.map((item: any) => (
+                            <ArticleItem article={item} />
+                        ))}
+                    </div>
+                ) : (
+                    <p class="text-center text-gray-500 py-12">
+                        No articles found.
+                    </p>
+                )
+            }
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+    .article-content {
+        line-height: 32px;
+        font-weight: 400;
+        letter-spacing: -0.003em;
+    }
+</style>

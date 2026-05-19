@@ -5,15 +5,14 @@ import Highlight from "../components/Hightlight.astro";
 import Overview from "../components/Overview.astro";
 import OurValueSlider from "../components/OurValueSlider.astro";
 import OurServices from "../components/OurServices.astro";
-// import ClientSlider from "../components/ClientSlider.astro";
 import WhyTrusted from "../components/WhyTrusted.astro";
 import Coverage from "../components/Coverage.astro";
 import CTA from "../components/CTA.astro";
 import Credential from "../components/Credential.astro";
 import ClientSlider from "../components/ClientSlider.astro";
-
 import heroImage from "../assets/images/hero_home.webp";
 
+export const prerender = true;
 const schema = [
   {
     "@context": "https://schema.org",

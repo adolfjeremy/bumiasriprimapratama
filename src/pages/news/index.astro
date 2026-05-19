@@ -1,0 +1,287 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+import ArticleItem from "../../components/ArticleItem.astro";
+import { fetchAPI, getStrapiMedia } from "../../lib/strapi";
+
+// ── Read query params ────────────────────────────────────
+const searchParams = Astro.url.searchParams;
+const page = Math.max(1, Number(searchParams.get("page") || 1));
+const search = searchParams.get("search") || "";
+const category = searchParams.get("category") || "";
+const PAGE_SIZE = 9;
+
+// ── Hero: latest article (always first, unfiltered) ──────
+const heroParams = new URLSearchParams({
+    sort: "publishedAt:desc",
+    "pagination[limit]": "1",
+    fields: "title,slug,publishedAt",
+    "populate[featured_image]": "true",
+    "populate[category]": "true",
+});
+
+// ── Articles grid: paginated + searchable + filterable ───
+const articlesParams = new URLSearchParams({
+    sort: "publishedAt:desc",
+    fields: "title,slug,publishedAt",
+    "populate[thumbnail]": "true",
+    "populate[category]": "true",
+    "pagination[page]": String(page),
+    "pagination[pageSize]": String(PAGE_SIZE),
+});
+
+// Add search filter (case-insensitive contains)
+if (search) {
+    articlesParams.set("filters[title][$containsi]", search);
+}
+
+// Add category filter
+if (category) {
+    articlesParams.set("filters[category][slug][$eq]", category);
+}
+
+// ── Fire all 3 calls in parallel ─────────────────────────
+const [heroRes, categoriesRes, articlesRes] = await Promise.all([
+    fetchAPI(`/api/articles?${heroParams}`),
+    fetchAPI("/api/categories"),
+    fetchAPI(`/api/articles?${articlesParams}`),
+]);
+
+const article = heroRes.data[0];
+const categories = categoriesRes.data;
+const articles = articlesRes.data;
+const pagination = articlesRes.meta.pagination; // { page, pageSize, pageCount, total }
+
+const currentPath = Astro.url.pathname;
+const schema = [
+    {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        name: "Contact PT Bumi Asri Prima Pratama",
+        url: "https://bumiasriprimapratama.com/contact/",
+        mainEntity: {
+            "@type": "Organization",
+            name: "PT Bumi Asri Prima Pratama",
+            contactPoint: {
+                "@type": "ContactPoint",
+                telephone: "+62-813-1034-402",
+                contactType: "sales",
+                areaServed: "Indonesia",
+                availableLanguage: "English",
+            },
+        },
+    },
+];
+---
+
+<BaseLayout
+    title="News PT Bumi Asri Prima Pratama | Fuel & Marine Service Inquiry"
+    description="News PT Bumi Asri Prima Pratama (BAPP) for High Speed Diesel trading, marine fuel supply, bunker services, and floating storage coordination across Indonesia."
+    schema={schema}
+>
+    {article && (
+    <section
+        class="relative h-screen flex items-center overflow-hidden px-5 md:px-16 lg:px-20 pt-28 md:pt-32 pb-20"
+    >
+        <!-- background -->
+        {article.featured_image && (
+            <Image
+                src={getStrapiMedia(article.featured_image.url)}
+                alt={article.featured_image.alternativeText || article.title}
+                class="hero-bg absolute inset-0 w-full h-full object-cover"
+                quality={70}
+                format="webp"
+                loading="eager"
+                width="1920"
+                height="1080"
+                fetchpriority="high"
+            />
+        )}
+
+        <!-- gradient overlay -->
+        <div class="absolute inset-0 hero-overlay"></div>
+
+        <!-- container -->
+        <div class="relative z-10 w-full max-w-[1280px] mx-auto">
+            <div
+                class="max-w-[820px] reveal-group text-left mx-auto lg:mx-0 text-white"
+            >
+                <p
+                    class="justify-center text-white text-lg font-bold leading-4 [text-shadow:_1px_2px_5px_rgb(0_0_0_/_1.00)]"
+                >
+                    Latest News
+                </p>
+                <h1 class="hero-title reveal mt-6 [text-shadow:_1px_2px_5px_rgb(0_0_0_/_0.70)">
+                    {article.title}
+                </h1>
+
+                <div class="mt-6 flex justify-start lg:justify-start reveal">
+                    <a
+                        href={`/news/${article.slug}`}
+                        class={`bg-[#fafafa] hover:bg-[#fafafa5] transition duration-300  px-4 py-2 rounded-2xl hover:shadow-xl cursor-pointer text-[#242424] font-medium`}
+                    >
+                        Read more
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    )}
+    <section class="px-[16px] md:px-[64px] lg:px-[80px] pt-6 md:pt-8">
+        <div class="flex items-center justify-between">
+            <div class="catergory_filter">
+                <a
+                    href="/news"
+                    class:list={[
+                        "text-sm border-b-1 py-3 px-4 hover:text-[#018FF5] transition-colors",
+                        !category
+                            ? "font-semibold border-[#018FF5] text-[#018FF5]"
+                            : "font-medium border-[#C5C0C0] text-[#242424]",
+                    ]}
+                >
+                    All News
+                </a>
+                {
+                    categories.map((cat: any) => (
+                        <a
+                            href={`/news?category=${cat.slug}`}
+                            class:list={[
+                                "text-sm font-medium border-b-1 py-3 px-4 hover:text-[#018FF5] transition-colors",
+                                category === cat.slug
+                                    ? "font-semibold border-[#018FF5] text-[#018FF5]"
+                                    : "font-medium border-[#C5C0C0] text-[#242424]",
+                            ]}
+                        >
+                            {cat.name}
+                        </a>
+                    ))
+                }
+            </div>
+            <div class="relative w-inherit max-w-md">
+                <form method="GET" action="/news">
+                    {category && <input type="hidden" name="category" value={category} />}
+                    <!-- icon -->
+                    <button type="submit" class="absolute right-4 top-1/2 -translate-y-1/2">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="w-5 h-5 text-[#C5C0C0]"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M21 21l-4.35-4.35m1.85-5.65a7 7 0 11-14 0 7 7 0 0114 0z"
+                            ></path>
+                        </svg>
+                    </button>
+                    <!-- input -->
+                    <input
+                        type="text"
+                        name="search"
+                        value={search}
+                        placeholder="Search"
+                        class="border-1 border-[#C5C0C0] outline-none py-2 ps-4 pe-10 rounded-3xl
+                            focus:border-[#018FF5] focus:border-2
+                            focus:outline-none"
+                    />
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Articles Grid ────────────────────────────────── -->
+    <section class="px-[16px] md:px-[64px] lg:px-[80px] pt-6 pb-12 md:pt-8 md:pb-16">
+        {articles.length > 0 ? (
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {articles.map((item: any) => (
+                    <ArticleItem article={item} />
+                ))}
+            </div>
+        ) : (
+            <p class="text-center text-gray-500 py-12">No articles found.</p>
+        )}
+
+        <!-- ── Pagination ──────────────────────────────── -->
+        {pagination.pageCount > 1 && (
+            <nav class="flex items-center justify-center gap-2 mt-10">
+                {page > 1 && (
+                    <a
+                        href={`/news?page=${page - 1}${category ? `&category=${category}` : ""}${search ? `&search=${search}` : ""}`}
+                        class="px-4 py-2 rounded-lg border border-[#C5C0C0] hover:border-[#018FF5] hover:text-[#018FF5] transition-colors"
+                    >
+                        ← Prev
+                    </a>
+                )}
+
+                {Array.from({ length: pagination.pageCount }, (_, i) => i + 1).map((p: number) => (
+                    <a
+                        href={`/news?page=${p}${category ? `&category=${category}` : ""}${search ? `&search=${search}` : ""}`}
+                        class:list={[
+                            "px-4 py-2 rounded-lg border transition-colors",
+                            p === page
+                                ? "bg-[#018FF5] text-white border-[#018FF5]"
+                                : "border-[#C5C0C0] hover:border-[#018FF5] hover:text-[#018FF5]",
+                        ]}
+                    >
+                        {p}
+                    </a>
+                ))}
+
+                {page < pagination.pageCount && (
+                    <a
+                        href={`/news?page=${page + 1}${category ? `&category=${category}` : ""}${search ? `&search=${search}` : ""}`}
+                        class="px-4 py-2 rounded-lg border border-[#C5C0C0] hover:border-[#018FF5] hover:text-[#018FF5] transition-colors"
+                    >
+                        Next →
+                    </a>
+                )}
+            </nav>
+        )}
+    </section>
+</BaseLayout>
+
+<style>
+    .hero-title {
+        font-weight: 500;
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+
+        font-size: clamp(1.5rem, 4vw, 3rem);
+    }
+
+    .hero-subtitle {
+        margin-top: 1.5rem;
+        max-width: 640px;
+
+        font-size: clamp(0.9375rem, 1.25vw, 1.215rem);
+        line-height: 1.7;
+
+        color: rgb(229 231 235);
+    }
+
+    .hero-overlay {
+        background: linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.65) 0%,
+            rgba(0, 0, 0, 0.45) 0%,
+            rgba(0, 0, 0, 0.2) 40%,
+            rgba(0, 0, 0, 0.1) 80%
+        );
+    }
+
+    .hero-bg {
+        animation: heroZoom 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroZoom {
+        from {
+            transform: scale(1);
+        }
+        to {
+            transform: scale(1.08);
+        }
+    }
+</style>

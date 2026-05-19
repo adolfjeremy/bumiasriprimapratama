@@ -2,31 +2,47 @@
 import { Image } from "astro:assets";
 import logo from "../assets/images/logo.webp";
 import Button from "./Button.astro";
+
+// Ambil props dan pathname
+const { isTransparent } = Astro.props;
 const pathname = Astro.url.pathname;
+
+// Logika: Transparan jika prop isTransparent bernilai true
+// ATAU jika berada di halaman detail news (/news/slug)
+const shouldBeTransparent = isTransparent || /^\/news\/.+/.test(pathname);
+
 const links = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about-us" },
   { name: "Services", href: "/services" },
+  { name: "News", href: "/news" },
   { name: "Contact Us", href: "/contact" },
 ];
+
 const isActive = (href: string) =>
   href === "/" ? pathname === "/" : pathname.startsWith(href);
 ---
 
 <header
-  class="absolute top-0 left-0 right-0 w-full z-50 px-[16px] md:px-[64px] lg:px-[80px] bg-black/30 backdrop-blur-xs"
+  class:list={[
+    "absolute top-0 left-0 right-0 w-full z-50 px-[16px] md:px-[64px] lg:px-[80px] transition-all duration-300",
+    shouldBeTransparent ? "bg-transparent" : "bg-black/30 backdrop-blur-xs",
+  ]}
 >
   <div class="mx-auto py-4 flex items-center justify-between">
     <!-- LOGO -->
     <div class="flex items-center gap-2">
-      <Image
-        src={logo}
-        alt="BAPP"
-        class="w-26 md:w-36 h-auto"
-        fetchpriority="high"
-        quality={90}
-        format="webp"
-      />
+      <a href="/">
+        <Image
+          src={logo}
+          alt="BAPP"
+          class="w-26 md:w-36 h-auto"
+          fetchpriority="high"
+          quality={90}
+          format="webp"
+          loading="lazy"
+        />
+      </a>
     </div>
 
     <!-- DESKTOP NAV -->
@@ -35,9 +51,10 @@ const isActive = (href: string) =>
         links.map((item) => (
           <a
             href={item.href}
-            class={`nav-link hover:text-[#0077cc] ${
-              isActive(item.href) ? "active" : ""
-            }`}
+            class:list={[
+              "nav-link hover:text-[#0077cc]",
+              { active: isActive(item.href) },
+            ]}
           >
             {item.name}
           </a>
@@ -69,12 +86,10 @@ const isActive = (href: string) =>
       class="absolute inset-0 w-[100svw] h-[100svh] bg-black/50"
     >
     </div>
-
     <div
       id="drawerPanel"
       class="absolute left-0 top-0 h-full w-72 bg-[#F3EFFE] p-6 flex flex-col items-center justify-center gap-6 transform -translate-x-full transition-[transform,opacity] duration-300 ease-out opacity-0"
     >
-      <!-- NAV -->
       <nav
         class="flex flex-col gap-4 text-[#141219] text-lg text-center mobile-nav"
       >
@@ -82,17 +97,16 @@ const isActive = (href: string) =>
           links.map((item) => (
             <a
               href={item.href}
-              class={`nav-link hover:text-[#0077cc] ${
-                isActive(item.href) ? "active" : ""
-              }`}
+              class:list={[
+                "nav-link hover:text-[#0077cc]",
+                { active: isActive(item.href) },
+              ]}
             >
               {item.name}
             </a>
           ))
         }
       </nav>
-
-      <!-- CTA -->
       <Button text="Company Profile" href="/compro-bapp.pdf" />
     </div>
   </div>
@@ -109,6 +123,15 @@ const isActive = (href: string) =>
       opacity 0.2s ease;
   }
 
+  .bg-transparent {
+    nav a:hover {
+      color: #0077cc !important;
+    }
+    nav a:not(.active) {
+      color: #242424;
+    }
+  }
+
   #menuBtn.is-open .line:nth-child(1) {
     transform: translateY(13px) rotate(45deg);
   }
@@ -120,9 +143,11 @@ const isActive = (href: string) =>
   #menuBtn.is-open .line:nth-child(3) {
     transform: translateY(-7px) rotate(-45deg);
   }
+
   .mobile-nav .nav-link {
     font-size: 1.6825rem;
   }
+
   .nav-link {
     transition: color 0.2s ease;
   }
@@ -139,68 +164,50 @@ const isActive = (href: string) =>
   const drawerPanel = document.getElementById("drawerPanel");
   const backdrop = document.getElementById("backdrop");
 
-  if (!menuBtn || !drawer || !drawerPanel || !backdrop) {
-    throw new Error("Required DOM elements not found");
-  }
+  if (menuBtn && drawer && drawerPanel && backdrop) {
+    let scrollY = 0;
 
-  let scrollY = 0;
+    const lockScroll = () => {
+      scrollY = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
+    };
 
-  function lockScroll() {
-    scrollY = window.scrollY;
+    const unlockScroll = () => {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      window.scrollTo(0, scrollY);
+    };
 
-    document.body.style.position = "fixed";
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.left = "0";
-    document.body.style.right = "0";
-    document.body.style.width = "100%";
-  }
+    const openDrawer = () => {
+      drawer.classList.remove("hidden");
+      lockScroll();
+      requestAnimationFrame(() => {
+        drawerPanel.classList.remove("-translate-x-full");
+        drawerPanel.classList.remove("opacity-0");
+        menuBtn.classList.add("is-open");
+      });
+    };
 
-  function unlockScroll() {
-    document.body.style.position = "";
-    document.body.style.top = "";
-    document.body.style.left = "";
-    document.body.style.right = "";
-    document.body.style.width = "";
+    const closeDrawer = () => {
+      drawerPanel.classList.add("-translate-x-full");
+      drawerPanel.classList.add("opacity-0");
+      menuBtn.classList.remove("is-open");
+      unlockScroll();
+      setTimeout(() => {
+        drawer.classList.add("hidden");
+      }, 300);
+    };
 
-    window.scrollTo(0, scrollY);
-  }
+    menuBtn.addEventListener("click", () => {
+      drawer.classList.contains("hidden") ? openDrawer() : closeDrawer();
+    });
 
-  function openDrawer() {
-    drawer!.classList.remove("hidden");
-
-    lockScroll();
-
-    requestAnimationFrame(() => {
-      drawerPanel!.classList.remove("-translate-x-full");
-      drawerPanel!.classList.remove("opacity-0");
-      menuBtn!.classList.add("is-open");
+    backdrop.addEventListener("click", closeDrawer);
+    document.querySelectorAll(".mobile-nav a").forEach((link) => {
+      link.addEventListener("click", closeDrawer);
     });
   }
-
-  function closeDrawer() {
-    drawerPanel!.classList.add("-translate-x-full");
-    drawerPanel!.classList.add("opacity-0");
-    menuBtn!.classList.remove("is-open");
-
-    unlockScroll();
-
-    setTimeout(() => {
-      drawer!.classList.add("hidden");
-    }, 300);
-  }
-
-  menuBtn!.addEventListener("click", () => {
-    if (drawer!.classList.contains("hidden")) {
-      openDrawer();
-    } else {
-      closeDrawer();
-    }
-  });
-
-  backdrop!.addEventListener("click", closeDrawer);
-
-  // close drawer when link clicked (mobile UX)
-  document.querySelectorAll(".mobile-nav a").forEach((link) => {
-    link.addEventListener("click", closeDrawer);
-  });
 </script>

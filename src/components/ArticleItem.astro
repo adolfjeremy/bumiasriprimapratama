@@ -1,0 +1,46 @@
+---
+const { article } = Astro.props;
+import { Image } from "astro:assets";
+import { getStrapiMedia } from "../lib/strapi";
+import { datetime } from "../lib/datetime";
+---
+
+<a
+    href={`/news/${article.slug}`}
+    class="relative p-8 w-full max-w-sm aspect-[3/4] rounded overflow-hidden"
+>
+    <Image
+        src={getStrapiMedia(article.thumbnail.url)}
+        alt={article.thumbnail.alternativeText}
+        class="absolute inset-0 w-full h-full object-cover"
+        quality={70}
+        format="webp"
+        loading="eager"
+        width="1920"
+        height="1080"
+        fetchpriority="high"
+    />
+    <div
+        class="absolute inset-x-0 bottom-0 h-50 bg-gradient-to-b from-sky-500/0 to-sky-500"
+    >
+    </div>
+    <div class="flex flex-col w-full h-full justify-between">
+        <div class="datetime relative">
+            <p class="text-white text-base font-semibold leading-8">
+                {datetime(article.publishedAt)}
+            </p>
+        </div>
+        <div class="flex flex-col gap-3 relative">
+            <p
+                class="justify-center text-white text-lg font-bold leading-4 [text-shadow:_1px_2px_5px_rgb(0_0_0_/_0.50)]"
+            >
+                {article.category.name}
+            </p>
+            <h2
+                class="text-white text-xl font-semibold leading-6 [text-shadow:_1px_2px_5px_rgb(0_0_0_/_0.50)]"
+            >
+                {article.title}
+            </h2>
+        </div>
+    </div>
+</a>
