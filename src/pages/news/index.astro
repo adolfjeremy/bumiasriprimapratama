@@ -127,7 +127,8 @@ const schema = [
         </div>
     </section>
     )}
-    <section class="px-[16px] md:px-[64px] lg:px-[80px] pt-6 md:pt-8">
+    {
+        articles.length > 0 && <section class="px-[16px] md:px-[64px] lg:px-[80px] pt-6 md:pt-8">
         <div class="flex items-center justify-between">
             <div class="catergory_filter">
                 <a
@@ -191,6 +192,8 @@ const schema = [
             </div>
         </div>
     </section>
+    }
+    
 
     <!-- ── Articles Grid ────────────────────────────────── -->
     <section class="px-[16px] md:px-[64px] lg:px-[80px] pt-6 pb-12 md:pt-8 md:pb-16">
@@ -201,7 +204,27 @@ const schema = [
                 ))}
             </div>
         ) : (
-            <p class="text-center text-gray-500 py-12">No articles found.</p>
+            <div class="text-center max-w-sm mx-auto pt-30">
+
+    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-slate-100 text-slate-400 mb-5 relative">
+      <span class="absolute inline-flex h-full w-full rounded-full bg-slate-100 animate-ping opacity-75"></span>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 relative z-10">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+      </svg>
+    </div>
+    <h3 class="text-lg font-semibold text-slate-800 mb-2 tracking-tight">
+      No Articles Published Yet
+    </h3>
+    <p class="text-slate-500 text-sm leading-relaxed mb-6">
+      We're currently creating high-quality content for you. Please come back soon or explore our other pages.
+    </p>
+    <a href="/" class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-white bg-slate-900 hover:bg-slate-800 rounded-xl transition-all duration-200 shadow-sm gap-2 group">
+      Back to Home
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+      </svg>
+    </a>
+  </div>
         )}
 
         <!-- ── Pagination ──────────────────────────────── -->
