@@ -129,35 +129,66 @@ const schema = [
     )}
     {
         articles.length > 0 && <section class="px-[16px] md:px-[64px] lg:px-[80px] pt-6 md:pt-8">
-        <div class="flex items-center justify-between">
-            <div class="catergory_filter">
+        <div class="flex items-center justify-between gap-3">
+            <div class="category_filter_wrapper w-full">
+    <!-- 1. VERSI MOBILE: Tampilan Dropdown -->
+    <div class="block md:hidden w-full relative">
+        <select
+            id="category-dropdown"
+            class="w-full appearance-none bg-white border border-[#C5C0C0] text-[#242424] text-sm font-medium rounded-full pl-4 pr-10 py-3 focus:outline-none focus:border-[#018FF5] focus:ring-1 focus:ring-[#018FF5] transition-colors cursor-pointer"
+            onchange="window.location.href=this.value"
+        >
+            <option value="/news" selected={!category}>All News</option>
+            {
+                categories.map((cat: any) => (
+                    <option
+                        value={`/news?category=${cat.slug}`}
+                        selected={category === cat.slug}
+                    >
+                        {cat.name}
+                    </option>
+                ))
+            }
+        </select>
+        
+        <!-- Ikon Panah Gunting (Chevron Down) Custom -->
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-[#242424]">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+        </div>
+    </div>
+
+    <!-- 2. VERSI DESKTOP: Tampilan Horizontal Tab (Kode Asli Anda) -->
+    <div class="hidden md:flex items-center flex-wrap w-full">
+        <a
+            href="/news"
+            class:list={[
+                "text-sm border-b py-3 px-4 hover:text-[#018FF5] transition-colors",
+                !category
+                    ? "font-semibold border-[#018FF5] text-[#018FF5]"
+                    : "font-medium border-[#C5C0C0] text-[#242424]",
+            ]}
+        >
+            All News
+        </a>
+        {
+            categories.map((cat: any) => (
                 <a
-                    href="/news"
+                    href={`/news?category=${cat.slug}`}
                     class:list={[
-                        "text-sm border-b-1 py-3 px-4 hover:text-[#018FF5] transition-colors",
-                        !category
+                        "text-sm font-medium border-b py-3 px-4 hover:text-[#018FF5] transition-colors",
+                        category === cat.slug
                             ? "font-semibold border-[#018FF5] text-[#018FF5]"
                             : "font-medium border-[#C5C0C0] text-[#242424]",
                     ]}
                 >
-                    All News
+                    {cat.name}
                 </a>
-                {
-                    categories.map((cat: any) => (
-                        <a
-                            href={`/news?category=${cat.slug}`}
-                            class:list={[
-                                "text-sm font-medium border-b-1 py-3 px-4 hover:text-[#018FF5] transition-colors",
-                                category === cat.slug
-                                    ? "font-semibold border-[#018FF5] text-[#018FF5]"
-                                    : "font-medium border-[#C5C0C0] text-[#242424]",
-                            ]}
-                        >
-                            {cat.name}
-                        </a>
-                    ))
-                }
-            </div>
+            ))
+        }
+    </div>
+</div>
             <div class="relative w-inherit max-w-md">
                 <form method="GET" action="/news">
                     {category && <input type="hidden" name="category" value={category} />}
@@ -184,9 +215,7 @@ const schema = [
                         name="search"
                         value={search}
                         placeholder="Search"
-                        class="border-1 border-[#C5C0C0] outline-none py-2 ps-4 pe-10 rounded-3xl
-                            focus:border-[#018FF5] focus:border-2
-                            focus:outline-none"
+                        class="appearance-none bg-white border border-[#C5C0C0] text-[#242424] text-sm font-medium rounded-full pl-4 pr-10 py-3 focus:outline-none focus:border-[#018FF5] focus:ring-1 focus:ring-[#018FF5] transition-colors cursor-pointer"
                     />
                 </form>
             </div>
