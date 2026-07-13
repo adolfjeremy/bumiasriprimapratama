@@ -20,8 +20,8 @@ const articlesParams = new URLSearchParams({
 });
 const articlesRes = await fetchAPI(`/api/articles?${articlesParams}`);
 
-const news = res.data[0];
-const relatedArticles = articlesRes.data;
+const news = res?.data?.[0];
+const relatedArticles = articlesRes?.data || [];
 
 if (!news) {
     throw new Error("Article not found");
