@@ -9,9 +9,10 @@ import { datetime } from "../lib/datetime";
     href={`/news/${article.slug}`}
     class="relative p-8 w-full max-w-sm aspect-[3/4] rounded overflow-hidden"
 >
+    {article.thumbnail && (
     <Image
         src={getStrapiMedia(article.thumbnail.url)}
-        alt={article.thumbnail.alternativeText}
+        alt={article.thumbnail.alternativeText || article.title}
         class="absolute inset-0 w-full h-full object-cover"
         quality={70}
         format="webp"
@@ -20,6 +21,7 @@ import { datetime } from "../lib/datetime";
         height="1080"
         fetchpriority="high"
     />
+    )}
     <div
         class="absolute inset-x-0 bottom-0 h-50 bg-gradient-to-b from-sky-500/0 to-sky-500"
     >
@@ -34,7 +36,7 @@ import { datetime } from "../lib/datetime";
             <p
                 class="justify-center text-white text-lg font-bold leading-4 [text-shadow:_1px_2px_5px_rgb(0_0_0_/_0.50)]"
             >
-                {article.category.name}
+                {article.category?.name || "Uncategorized"}
             </p>
             <h2
                 class="text-white text-xl font-semibold leading-6 [text-shadow:_1px_2px_5px_rgb(0_0_0_/_0.50)]"
